@@ -1,0 +1,850 @@
+{
+  "schema": "VCDESIGN_FIG4_DATA_V2",
+  "generated_by": "figures/scripts/build_fig4_data.py",
+  "source": {
+    "kind": "canonical Figure 4 row extraction",
+    "sha256": "13b0677a773587e7fec56f69d3c508964406d4eedd725d87745811c3293e4835"
+  },
+  "contract": {
+    "core_conclusion": "controlled interventions localize the information, measurement, capacity, and model-selection limits of transferable intervention design",
+    "archetype": "asymmetric four-panel insight figure",
+    "final_size_inches": [
+      5.5,
+      4.05
+    ],
+    "panel_map": {
+      "a": "candidate-information factorial diagnostic",
+      "b": "same-identity measurement intervention",
+      "c": "capacity and candidate-information interventions",
+      "d": "global prediction-design association with within-atlas changes"
+    },
+    "cross_panel_warning": "panels use different populations, references, and metrics; effect sizes are not ranked or ratioed across panels"
+  },
+  "panel_a": {
+    "statistic": "median MBRU over development-split query-view rows of one bilinear probe scorer per cell (record key probes.<cell>.MBRU_full.median); edges are differences of cell medians",
+    "query_levels": {
+      "Q_CURRENT": "learned query embedding",
+      "Q_RAW": "raw desired transition"
+    },
+    "candidate_levels": {
+      "C_LEGAL": "knowledge features (with text)",
+      "C_ORACLE": "measured response, other view (not deployable)"
+    },
+    "cells": {
+      "Q_CURRENT__C_LEGAL": 0.14525184243164202,
+      "Q_RAW__C_LEGAL": 0.13314494680065558,
+      "Q_CURRENT__C_ORACLE": 0.6345437235865714,
+      "Q_RAW__C_ORACLE": 0.6364950071116773
+    },
+    "candidate_swap": {
+      "Q_CURRENT": 0.4892918811549294,
+      "Q_RAW": 0.5033500603110217
+    },
+    "query_swap": {
+      "C_LEGAL": -0.012106895630986436,
+      "C_ORACLE": 0.0019512835251058736
+    },
+    "swap_ratio_floor": 40,
+    "swap_ratio_rule": "swap_ratio_floor is the smallest candidate-swap magnitude divided by the largest query-swap magnitude, rounded down to an integer, so the printed ratio holds for every pair of edges in the panel"
+  },
+  "panel_b": {
+    "statistic": "median paired MBRU gain over the frozen K562 base scorer for raw-target CED; same perturbation identities in both arms",
+    "conditions": {
+      "M_spread": "M rows spread across the three training contexts",
+      "three_M": "the same identities measured in all three contexts (3M rows)"
+    },
+    "contexts": {
+      "RPE1": {
+        "M_spread": 0.01932,
+        "three_M": 0.04759,
+        "increment": 0.02827
+      },
+      "HepG2": {
+        "M_spread": 0.03011,
+        "three_M": 0.05075,
+        "increment": 0.020640000000000002
+      },
+      "Jurkat": {
+        "M_spread": 0.00687,
+        "three_M": 0.02355,
+        "increment": 0.01668
+      }
+    },
+    "posthoc_best_single_companion": {
+      "RPE1": {
+        "value": 0.03404,
+        "context": "Jurkat"
+      },
+      "HepG2": {
+        "value": 0.0349,
+        "context": "Jurkat"
+      },
+      "Jurkat": {
+        "value": 0.01222,
+        "context": "RPE1"
+      }
+    },
+    "main_figure_scope": "the retrospectively selected best-single arm is omitted from the main panel and retained in the supplementary same-identity figure",
+    "fit_scope": "3M is one fit; M-spread is the mean of five row-sampling-seed medians"
+  },
+  "panel_c": {
+    "statistic": "median paired BU@20 difference against the unit-direction ridge (RIDGE_UNIT, also called A1), pooled response-unseen candidates, fused",
+    "ci_source": "95% bootstrap interval of the median, resampling query genes (976 clusters)",
+    "variants": [
+      {
+        "label": "Predictive response basis",
+        "group": "model",
+        "record": "sped",
+        "record_key": "table.MASKED.M3_PREDICTIVE_EFFECT_minus_M1_RIDGE_UNIT.fused|BU@20",
+        "median": 0.0009086250815539543,
+        "ci95": [
+          0.0005963330100796138,
+          0.0012947454874863984
+        ],
+        "clusters": 976,
+        "query_view_rows": 2666
+      },
+      {
+        "label": "Context-invariant adapter",
+        "group": "model",
+        "record": "ita",
+        "record_key": "pooled.MASKED.ITA_ERM_minus_RIDGE_UNIT.BU@20",
+        "median": 0.000765517042807029,
+        "ci95": [
+          -0.00026301082934039144,
+          0.0018657979937954125
+        ],
+        "clusters": 976,
+        "query_view_rows": 2666
+      },
+      {
+        "label": "Nonlinear memory, anchored",
+        "group": "model",
+        "record": "ppm",
+        "record_key": "PPM_FULL_ANCHORED.delta_BU@20_vs_RIDGE_UNIT",
+        "median": 3.607056276377918e-05,
+        "ci95": [
+          -0.0009776275291242809,
+          0.001140990886433435
+        ],
+        "clusters": 976,
+        "query_view_rows": 2666
+      },
+      {
+        "label": "Nonlinear effect memory",
+        "group": "model",
+        "record": "ppm",
+        "record_key": "PPM_FULL.delta_BU@20_vs_RIDGE_UNIT",
+        "median": -0.02331013574684493,
+        "ci95": [
+          -0.025706710558696,
+          -0.02079947856627999
+        ],
+        "clusters": 976,
+        "query_view_rows": 2666
+      },
+      {
+        "label": "Drop MAP-KG (STRING only)",
+        "group": "information",
+        "record": "evidence",
+        "record_key": "pooled_classes.STRING_only|MASKED|fused|BU@20_minus_A1",
+        "median": -0.0012912238309953153,
+        "ci95": [
+          -0.002618923622687952,
+          -0.00020217538296346538
+        ],
+        "clusters": 976,
+        "query_view_rows": 2666
+      },
+      {
+        "label": "Drop STRING (MAP-KG only)",
+        "group": "information",
+        "record": "evidence",
+        "record_key": "pooled_classes.MAPKG_only|MASKED|fused|BU@20_minus_A1",
+        "median": -0.021053217176577016,
+        "ci95": [
+          -0.02354052860120623,
+          -0.017724847466990157
+        ],
+        "clusters": 976,
+        "query_view_rows": 2666
+      }
+    ]
+  },
+  "panel_d": {
+    "prediction_metric": "held-context candidate-specific cosine after removing the A1 common response axis",
+    "design_metric": "effect-only BU@20",
+    "regime": "MASKED",
+    "grid_points": [
+      {
+        "atlas": "K562",
+        "design_effect_only_BU@20": 0.25150521772844076,
+        "estimator": "RIDGE_UNIT[K562]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.01376470432711248,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562@matched",
+        "design_effect_only_BU@20": 0.046077498613200235,
+        "estimator": "RIDGE_UNIT[K562@matched]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": -0.04592916650292401,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "HepG2",
+        "design_effect_only_BU@20": 0.1561621905238386,
+        "estimator": "RIDGE_UNIT[HepG2]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.16212533529971335,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "HepG2@matched",
+        "design_effect_only_BU@20": 0.1561621905238386,
+        "estimator": "RIDGE_UNIT[HepG2@matched]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.16212533529971335,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "Jurkat",
+        "design_effect_only_BU@20": 0.24667676428782145,
+        "estimator": "RIDGE_UNIT[Jurkat]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.005824962767817657,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "Jurkat@matched",
+        "design_effect_only_BU@20": 0.21607599585882267,
+        "estimator": "RIDGE_UNIT[Jurkat@matched]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": -0.01125546720853515,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2",
+        "design_effect_only_BU@20": 0.23361894042233072,
+        "estimator": "RIDGE_UNIT[K562+HepG2]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.0682421279521577,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2@matched",
+        "design_effect_only_BU@20": 0.021576886852229936,
+        "estimator": "RIDGE_UNIT[K562+HepG2@matched]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.020126311215655012,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+Jurkat",
+        "design_effect_only_BU@20": 0.21308611450173254,
+        "estimator": "RIDGE_UNIT[K562+Jurkat]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.02299133009203644,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+Jurkat@matched",
+        "design_effect_only_BU@20": 0.12393988231907159,
+        "estimator": "RIDGE_UNIT[K562+Jurkat@matched]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": -0.049314818872811333,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "HepG2+Jurkat",
+        "design_effect_only_BU@20": 0.22392554609545687,
+        "estimator": "RIDGE_UNIT[HepG2+Jurkat]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.09059202254140383,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "HepG2+Jurkat@matched",
+        "design_effect_only_BU@20": 0.2616304782342054,
+        "estimator": "RIDGE_UNIT[HepG2+Jurkat@matched]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.06273578319280085,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2+Jurkat",
+        "design_effect_only_BU@20": 0.2267946161971875,
+        "estimator": "RIDGE_UNIT[full]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.05662325637981144,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2+Jurkat@matched",
+        "design_effect_only_BU@20": 0.04363267150351708,
+        "estimator": "RIDGE_UNIT[full@matched]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.007897594905906857,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2+Jurkat",
+        "design_effect_only_BU@20": 0.24664760884133138,
+        "estimator": "RIDGE_UNIT[STRING_only]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.04958920956470044,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2+Jurkat",
+        "design_effect_only_BU@20": 0.16393589725590763,
+        "estimator": "RIDGE_UNIT[MAPKG_only]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.03770253343761326,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2+Jurkat",
+        "design_effect_only_BU@20": 0.20327147986717609,
+        "estimator": "RIDGE_UNIT[rank64]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.05863547814517343,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2+Jurkat",
+        "design_effect_only_BU@20": 0.2203151936187298,
+        "estimator": "RIDGE_UNIT[rank128]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.0589615486025823,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2+Jurkat",
+        "design_effect_only_BU@20": 0.2312571245756705,
+        "estimator": "RIDGE_UNIT[rank512]",
+        "family": "ridge",
+        "held": "RPE1",
+        "prediction": 0.05350150977970034,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562",
+        "design_effect_only_BU@20": 0.3267633636675404,
+        "estimator": "RIDGE_UNIT[K562]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.027967757651575022,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562@matched",
+        "design_effect_only_BU@20": 0.233876052168774,
+        "estimator": "RIDGE_UNIT[K562@matched]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": -0.05429401433956417,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "RPE1",
+        "design_effect_only_BU@20": 0.3611367436698314,
+        "estimator": "RIDGE_UNIT[RPE1]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.12066492783288618,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "RPE1@matched",
+        "design_effect_only_BU@20": 0.3611367436698314,
+        "estimator": "RIDGE_UNIT[RPE1@matched]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.12066492783288618,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "Jurkat",
+        "design_effect_only_BU@20": 0.2947112993323744,
+        "estimator": "RIDGE_UNIT[Jurkat]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.027396114141031075,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "Jurkat@matched",
+        "design_effect_only_BU@20": 0.2670029923307054,
+        "estimator": "RIDGE_UNIT[Jurkat@matched]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.02849378877278893,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1",
+        "design_effect_only_BU@20": 0.3780427792609171,
+        "estimator": "RIDGE_UNIT[K562+RPE1]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.08685275629528066,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1@matched",
+        "design_effect_only_BU@20": 0.21778456604185917,
+        "estimator": "RIDGE_UNIT[K562+RPE1@matched]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.017861968520192693,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+Jurkat",
+        "design_effect_only_BU@20": 0.3605800273675388,
+        "estimator": "RIDGE_UNIT[K562+Jurkat]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.03957080709588369,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+Jurkat@matched",
+        "design_effect_only_BU@20": 0.17827528654596753,
+        "estimator": "RIDGE_UNIT[K562+Jurkat@matched]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": -0.03673393663296309,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "RPE1+Jurkat",
+        "design_effect_only_BU@20": 0.3931294482153106,
+        "estimator": "RIDGE_UNIT[RPE1+Jurkat]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.11450317577353489,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "RPE1+Jurkat@matched",
+        "design_effect_only_BU@20": 0.2927185607457817,
+        "estimator": "RIDGE_UNIT[RPE1+Jurkat@matched]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.09442846959796924,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+Jurkat",
+        "design_effect_only_BU@20": 0.3750138387234628,
+        "estimator": "RIDGE_UNIT[full]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.08424259129260028,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+Jurkat@matched",
+        "design_effect_only_BU@20": 0.18823014974836258,
+        "estimator": "RIDGE_UNIT[full@matched]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.018501545385016766,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+Jurkat",
+        "design_effect_only_BU@20": 0.39664963282439836,
+        "estimator": "RIDGE_UNIT[STRING_only]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.0759369368645047,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+Jurkat",
+        "design_effect_only_BU@20": 0.24309061022260697,
+        "estimator": "RIDGE_UNIT[MAPKG_only]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.0548041009958286,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+Jurkat",
+        "design_effect_only_BU@20": 0.35649779915179575,
+        "estimator": "RIDGE_UNIT[rank64]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.09068194118615919,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+Jurkat",
+        "design_effect_only_BU@20": 0.3679232334042824,
+        "estimator": "RIDGE_UNIT[rank128]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.09059047690554077,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+Jurkat",
+        "design_effect_only_BU@20": 0.3812531379025637,
+        "estimator": "RIDGE_UNIT[rank512]",
+        "family": "ridge",
+        "held": "HepG2",
+        "prediction": 0.07966443202232991,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562",
+        "design_effect_only_BU@20": 0.31604865413605787,
+        "estimator": "RIDGE_UNIT[K562]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.06115531860491177,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562@matched",
+        "design_effect_only_BU@20": 0.19702580544230452,
+        "estimator": "RIDGE_UNIT[K562@matched]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.02583701241691716,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "RPE1",
+        "design_effect_only_BU@20": 0.2340106140577211,
+        "estimator": "RIDGE_UNIT[RPE1]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.00752072897968359,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "RPE1@matched",
+        "design_effect_only_BU@20": 0.16939408359804475,
+        "estimator": "RIDGE_UNIT[RPE1@matched]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.0029469245849898314,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "HepG2",
+        "design_effect_only_BU@20": 0.0957618659595135,
+        "estimator": "RIDGE_UNIT[HepG2]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.024908531061944753,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "HepG2@matched",
+        "design_effect_only_BU@20": 0.0957618659595135,
+        "estimator": "RIDGE_UNIT[HepG2@matched]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.024908531061944753,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1",
+        "design_effect_only_BU@20": 0.3820439530138651,
+        "estimator": "RIDGE_UNIT[K562+RPE1]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.0653631898314462,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1@matched",
+        "design_effect_only_BU@20": 0.14757885245027175,
+        "estimator": "RIDGE_UNIT[K562+RPE1@matched]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.01119699818889913,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2",
+        "design_effect_only_BU@20": 0.3060699277323828,
+        "estimator": "RIDGE_UNIT[K562+HepG2]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.07240661062623231,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+HepG2@matched",
+        "design_effect_only_BU@20": 0.21147235234552617,
+        "estimator": "RIDGE_UNIT[K562+HepG2@matched]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.02411486774410957,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "RPE1+HepG2",
+        "design_effect_only_BU@20": 0.25055675373486236,
+        "estimator": "RIDGE_UNIT[RPE1+HepG2]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.030508792505814727,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "RPE1+HepG2@matched",
+        "design_effect_only_BU@20": 0.12066907740991059,
+        "estimator": "RIDGE_UNIT[RPE1+HepG2@matched]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.019176881337372807,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+HepG2",
+        "design_effect_only_BU@20": 0.3520176361840939,
+        "estimator": "RIDGE_UNIT[full]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.07507786851860608,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+HepG2@matched",
+        "design_effect_only_BU@20": 0.1249854714272213,
+        "estimator": "RIDGE_UNIT[full@matched]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.007251396937727323,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+HepG2",
+        "design_effect_only_BU@20": 0.38160134568420545,
+        "estimator": "RIDGE_UNIT[STRING_only]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.0646258855993107,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+HepG2",
+        "design_effect_only_BU@20": 0.12038393005045306,
+        "estimator": "RIDGE_UNIT[MAPKG_only]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.03715246683429027,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+HepG2",
+        "design_effect_only_BU@20": 0.32399519352999195,
+        "estimator": "RIDGE_UNIT[rank64]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.07924546925026033,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+HepG2",
+        "design_effect_only_BU@20": 0.33875745110598005,
+        "estimator": "RIDGE_UNIT[rank128]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.07796609043389711,
+        "regime": "MASKED"
+      },
+      {
+        "atlas": "K562+RPE1+HepG2",
+        "design_effect_only_BU@20": 0.3668242968337838,
+        "estimator": "RIDGE_UNIT[rank512]",
+        "family": "ridge",
+        "held": "Jurkat",
+        "prediction": 0.06849918907702769,
+        "regime": "MASKED"
+      }
+    ],
+    "controlled_changes": [
+      {
+        "d_design": -0.023523136330011407,
+        "d_prediction": 0.0020122217653619837,
+        "held": "RPE1",
+        "kind": "same atlas, one input changed",
+        "pair": "rank64_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": -0.006479422578457683,
+        "d_prediction": 0.002338292222770856,
+        "held": "RPE1",
+        "kind": "same atlas, one input changed",
+        "pair": "rank128_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": 0.004462508378482999,
+        "d_prediction": -0.0031217466001111013,
+        "held": "RPE1",
+        "kind": "same atlas, one input changed",
+        "pair": "rank512_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": 0.01985299264414389,
+        "d_prediction": -0.007034046815111002,
+        "held": "RPE1",
+        "kind": "same atlas, one input changed",
+        "pair": "STRING_only_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": -0.06285871894127987,
+        "d_prediction": -0.01892072294219818,
+        "held": "RPE1",
+        "kind": "same atlas, one input changed",
+        "pair": "MAPKG_only_vs_full",
+        "regime": "MASKED",
+        "same_sign": true
+      },
+      {
+        "d_design": -0.01851603957166703,
+        "d_prediction": 0.006439349893558904,
+        "held": "HepG2",
+        "kind": "same atlas, one input changed",
+        "pair": "rank64_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": -0.007090605319180376,
+        "d_prediction": 0.006347885612940488,
+        "held": "HepG2",
+        "kind": "same atlas, one input changed",
+        "pair": "rank128_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": 0.006239299179100932,
+        "d_prediction": -0.004578159270270374,
+        "held": "HepG2",
+        "kind": "same atlas, one input changed",
+        "pair": "rank512_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": 0.02163579410093558,
+        "d_prediction": -0.008305654428095582,
+        "held": "HepG2",
+        "kind": "same atlas, one input changed",
+        "pair": "STRING_only_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": -0.1319232285008558,
+        "d_prediction": -0.02943849029677168,
+        "held": "HepG2",
+        "kind": "same atlas, one input changed",
+        "pair": "MAPKG_only_vs_full",
+        "regime": "MASKED",
+        "same_sign": true
+      },
+      {
+        "d_design": -0.02802244265410192,
+        "d_prediction": 0.004167600731654245,
+        "held": "Jurkat",
+        "kind": "same atlas, one input changed",
+        "pair": "rank64_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": -0.013260185078113829,
+        "d_prediction": 0.0028882219152910338,
+        "held": "Jurkat",
+        "kind": "same atlas, one input changed",
+        "pair": "rank128_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": 0.01480666064968994,
+        "d_prediction": -0.006578679441578389,
+        "held": "Jurkat",
+        "kind": "same atlas, one input changed",
+        "pair": "rank512_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": 0.029583709500111577,
+        "d_prediction": -0.010451982919295374,
+        "held": "Jurkat",
+        "kind": "same atlas, one input changed",
+        "pair": "STRING_only_vs_full",
+        "regime": "MASKED",
+        "same_sign": false
+      },
+      {
+        "d_design": -0.23163370613364082,
+        "d_prediction": -0.03792540168431581,
+        "held": "Jurkat",
+        "kind": "same atlas, one input changed",
+        "pair": "MAPKG_only_vs_full",
+        "regime": "MASKED",
+        "same_sign": true
+      }
+    ],
+    "spearman": 0.610475480504327,
+    "p_value": 4.6030020493059514e-07,
+    "n_grid": 57,
+    "same_sign": {
+      "agree": 3,
+      "pairs": 15
+    }
+  },
+  "mandatory_assertions": {
+    "panel_a_one_factorial_artifact": true,
+    "panel_a_candidate_edges_recomputed_from_cells": true,
+    "panel_b_same_identity_universe": true,
+    "panel_b_posthoc_reference_excluded_from_main": true,
+    "panel_c_common_unit_direction_ridge_reference": true,
+    "panel_d_masked_grid_count_57": true,
+    "panel_d_masked_controlled_count_15": true,
+    "panel_d_spearman_recomputed": true,
+    "panel_d_sign_agreement_recomputed": true,
+    "no_cross_panel_effect_size_ratio": true
+  }
+}

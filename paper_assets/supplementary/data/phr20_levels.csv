@@ -1,0 +1,10 @@
+method,method_regime,rpe1,hepg2,jurkat
+Random,MASKED,0.308,0.538,0.453
+Goal-blind prior,MASKED,0.329,0.681,0.584
+GEARS,MASKED,0.3,0.467,0.417
+"CellNavi, official recipe",SEEN,0.316,0.55,0.399
+"CellNavi, native class scale",SEEN,0.367,0.616,0.381
+Internal forward-then-match,MASKED,0.447,0.577,0.633
+BASE,MASKED,0.477,0.648,0.692
+VCDesign-CED,MASKED,0.503,0.67,0.703
+Measured-response oracle,MASKED,0.787,0.798,0.835

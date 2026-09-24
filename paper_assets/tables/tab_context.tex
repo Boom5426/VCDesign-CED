@@ -1,0 +1,35 @@
+% Full context-transfer table, input from appendix/additional_results.tex (app:context-details).
+% Appendix-only since display v2 (2026-09-24): the main text no longer quotes leave-one-context-out
+% values; held-context results use the unit-direction masking design (Table 1, Figures 2 to 4).
+% Sources: ledger L4.C C1 (zero-shot), L4.C C2 (leave-one-context-out, all atlases) and L1.1
+% (usable identities per held context). Leave-one-context-out entries are point estimates; no
+% interval is recorded for them. Empty cells: not reported. The K562 column uses
+% development-split queries (D8).
+\begin{table}[h]
+\centering
+\caption{\textbf{Context transfer.} \mbu{} differences of \vcced{} against the K562 base
+scorer (median over query-view rows of the held context). Zero-shot: the K562 map on the
+K562 gene axis, nothing trained on RPE1, 95\% bootstrap interval over query-view rows.
+Leave-one-context-out: the held context contributes no training row, \ced{} is refit on the shared
+6,550-gene axis, point estimates. --: the atlas contains the held context; empty: not reported.
+$^\dagger$Base scorer trained on K562; development-split queries.}
+\label{tab:context}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Effect atlas & Held RPE1 & Held HepG2 & Held Jurkat & Held K562$^\dagger$ \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Zero-shot, K562 gene axis}} \\
+K562 map, unchanged & $+0.0196$ \ci{+0.0146}{+0.0242} & & & -- \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Leave one context out, shared 6,550-gene axis}} \\
+K562 only & $+0.0201$ & $+0.0318$ & $+0.0277$ & -- \\
+Jurkat only & $+0.0488$ & & -- & $+0.0071$ \\
+RPE1 only & -- & & $+0.0259$ & $-0.0021$ \\
+HepG2 only & $+0.0057$ & -- & $+0.0012$ & $-0.0015$ \\
+Three other contexts & $\mathbf{+0.0594}$ & $\mathbf{+0.0518}$ & $\mathbf{+0.0343}$ & $\mathbf{+0.0076}$ \\
+\midrule
+Pool (usable identities) & $1{,}483$ & $881$ & $1{,}696$ & $7{,}825$ \\
+\bottomrule
+\end{tabular}
+\end{table}

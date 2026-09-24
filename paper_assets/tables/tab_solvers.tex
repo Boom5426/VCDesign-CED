@@ -1,0 +1,41 @@
+% Table 1 (main text). Sources: K562 column, tables/tab_main.tex (locked held-out evaluation record,
+% notes/result_summary.md section 4, Claim A); held-context columns,
+% supplementary/data/external_baseline_levels.csv (pooled column; per-context values in Figure 2a).
+% Values are rounded to three decimals from the recorded medians. GEARS SEEN pooled level -0.078.
+\begin{table}[t]
+\centering
+\caption{\textbf{Solvers, the information they need, and how well they select.} Median BU over
+query-view rows: $\mbu$ on the locked K562 split, whose candidates neither branch has seen, and
+$\bu{20}$ in held-out contexts, with each candidate's own response masked from the effect atlas or
+measured elsewhere. The K562-trained base scorer saw about two thirds of the masked candidates, so
+paired gains (\cref{fig:hero}) isolate the effect branch. Oracle: 0.814 and 0.951. --: not
+applicable.}
+\label{tab:solvers}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}llccc@{}}
+\toprule
+& & Held-out & \multicolumn{2}{c}{Held-out contexts} \\
+\cmidrule(l){4-5}
+Solver & Interface & identities & masked & measured \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Can score without a candidate-specific measured response}} \\
+Random & none & $-0.005$ & $0.002$ & $-0.005$ \\
+Goal-blind prior & effect size, ignores target & $0.181$ & $0.170$ & $0.194$ \\
+CED effect only & forward simulation + match & $0.125$ & $0.294$ & $0.396$ \\
+Text-augmented ranker & direct scoring + text & $0.385$ & & \\
+Base scorer & direct scoring & $0.355$ & $0.440$ & $0.440$ \\
+\vcced{} & direct scoring + effect & $\mathbf{0.391}$ & $\mathbf{0.499}$ & $0.508$ \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Requires a candidate-specific measured response}} \\
+CellNavi, official$^{\ast}$ & fixed-output identification & & -- & $-0.020$ \\
+CellNavi, native$^{\ast}$ & fixed-output identification & & -- & $0.015$ \\
+Profile retrieval & retrieval & & -- & $\mathbf{0.675}$ \\
+\bottomrule
+\end{tabular}
+
+\vspace{2pt}
+\parbox{\linewidth}{\scriptsize $^{\ast}$Official or candidate-library classes; one fine-tune per
+context (\cref{app:external-baselines}). GEARS predicted a candidate-invariant shift in every fit.
+Blank: not run.}
+\end{table}

@@ -1,0 +1,96 @@
+{
+  "diagnostics": {
+    "bootstrap_n": 5000,
+    "bootstrap_seed": 20260914,
+    "independent_metric_rows": 200,
+    "metric_tolerance": 1e-12,
+    "string_alpha100_score_tolerance": 2e-05,
+    "target_derangement_salts": [
+      202609120,
+      202609121,
+      202609122,
+      202609123,
+      202609124,
+      202609125,
+      202609126,
+      202609127,
+      202609128,
+      202609129
+    ]
+  },
+  "feature": {
+    "all_rule": "concatenate independently G_fit-standardised source blocks in STRING,SEQUENCE,FUNCTION,TEXT order",
+    "function_components": 512,
+    "function_svd_iterations": 7,
+    "missing_rule": "fit transforms on present G_fit rows; represent every missing source row by the all-zero post-standardisation vector",
+    "random_state": 20260911,
+    "reactome_min_gfit_members": 2,
+    "sd_floor": 1e-06,
+    "sequence_components": 512,
+    "sequence_pca_iterated_power": 4,
+    "sequence_pca_solver": "randomized",
+    "text_batch_size": 128,
+    "text_max_tokens": 256
+  },
+  "paths": {
+    "evaluator": "${MVCI_ACTIVE_ROOT}/evaluate.py",
+    "gcp_check_label": "${MVCI_GCP_ROOT}/assets/check_label.npz",
+    "gcp_check_query": "${MVCI_GCP_ROOT}/assets/check_query.npz",
+    "gcp_fit_asset": "${MVCI_GCP_ROOT}/assets/fit_asset.npz",
+    "gcp_select_asset": "${MVCI_GCP_ROOT}/assets/select_asset.npz",
+    "hek_shadow": "${MVCI_TVB_ROOT}/shadow/HEK293T_R1",
+    "ncbi_gene_info": "${MVCI_CK_RUN}/raw/Homo_sapiens.gene_info_2026-09-11.gz",
+    "reactome_gmt_zip": "${MVCI_CK_RUN}/raw/ReactomePathways_v97.gmt.zip",
+    "sequence": "${MVCI_CACHE_ROOT}/stage1b_c2_esm.npz",
+    "split": "${MVCI_REPO_ROOT}/gene_open_inverse/docs/GOAL_CONDITIONAL_POP_V1_SPLIT_V1.json",
+    "string": "${MVCI_CACHE_ROOT}/stage1b_c3_string.npz",
+    "text_encoder": "inputs/c9745ed1d9f207416be6d2e6f8de32d1f16199bf"
+  },
+  "ridge": {
+    "alphas": [
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0,
+      10000.0
+    ],
+    "fit_target": "mean of separately normalised R0 and R1 coefficients on the frozen G_fit XSVD8 basis",
+    "intercept_unpenalised": true,
+    "selection": "maximum G_select true-query SoftNDCG@10; exact tie chooses smaller alpha"
+  },
+  "schema": "CANDIDATE_KNOWLEDGE_V1_CONFIG",
+  "shuffle": {
+    "arm": "ALL",
+    "rule": "G_fit rows receive one fixed no-self permutation; every non-G_fit row receives a balanced deterministic donor from G_fit",
+    "seed": 20260913
+  },
+  "sources": {
+    "function": {
+      "name": "Reactome human pathway membership",
+      "release": 97,
+      "url": "https://download.reactome.org/97/ReactomePathways.gmt.zip"
+    },
+    "sequence": {
+      "fine_tuned_on_project_response": false,
+      "multi_isoform_rule": "arithmetic mean of per-protein embeddings assigned to the gene",
+      "name": "esm2_t48_15B_UR50D layer 48 mean residue embedding",
+      "protein_mapping": "Ensembl GRCh38 release 105 peptide records; direct current symbol then the frozen unique ENSG recovery map",
+      "raw_dimension": 5120,
+      "residue_rule": "mean over residues, truncate at 1022 amino acids"
+    },
+    "string": {
+      "dimension": 512,
+      "name": "STRING physical v12.0 spectral SVD"
+    },
+    "text": {
+      "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+      "encoder_revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+      "fine_tuned_on_project_response": false,
+      "mapping": "exact current NCBI Symbol, otherwise a unique Synonyms-field match; ambiguous aliases are missing",
+      "name": "NCBI Homo_sapiens Gene descriptions encoded by all-MiniLM-L6-v2",
+      "pooling": "attention-mask mean pooling followed by row L2 normalisation",
+      "url": "https://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz"
+    }
+  }
+}

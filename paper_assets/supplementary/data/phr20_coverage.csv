@@ -1,0 +1,4 @@
+context,candidates,full_stratum_candidates,queries,full_stratum_queries,positive_fraction,powered
+RPE1,247,1273,86,502,0.315,true
+HepG2,74,764,16,207,0.529,false
+Jurkat,342,1450,135,624,0.453,true

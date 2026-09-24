@@ -1,0 +1,32 @@
+% Ledger: result_summary.md sections 4.B (score composition) and 5.2 (effect target).
+% Pooled population 1,333 queries = 2,666 query-view rows: see notes/derived_numbers.md (G4 round 1).
+% The pooled CED rows (+0.0488, +0.0430) are in tab:masking. The effect-map rows (nonlinear memory,
+% anchored memory, invariant adapter) and the other variants are in tab:app-variants
+% (appendix/model_variants.tex) and stated inline in sections/05c_analysis.tex. The keep-predicted-norm
+% rows (+0.0142 measured, -0.0004 response-unseen) are in tab:app-variants and App. E.1 text.
+% Win rates 0.629 / 0.498 / 0.252: RPE1 zero-shot rows (notes/derived_numbers.md, revise-G4-r3).
+\begin{table}[t]
+\centering
+\caption{\textbf{Goal-conditioned direction carries the gain.} Median paired \mbu{} differences
+between each variant and its reference, with 95\% bootstrap intervals. Upper block: terms fused
+with the base scorer in RPE1 zero-shot ($1{,}004$ query-view rows, resampled by query-view row).
+Lower block: unit-direction against raw-target \ced{}, pooled over RPE1, HepG2 and Jurkat, each
+held out in turn ($2{,}666$ query-view rows, resampled by query gene). Win rate: share of rows
+with a strictly positive difference. Only the goal-conditioned effect score adds to the base
+scorer, and unit-direction targets refine it for measured and response-unseen candidates.}
+\label{tab:ablation}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lllcc@{}}
+\toprule
+Variant & Reference & Setting & Median diff.\ [95\% CI] & Win rate \\
+\midrule
+\vcced{} & Base scorer & RPE1 zero-shot & $+0.0196$ \ci{+0.0146}{+0.0242} & $0.629$ \\
+Base + $\|\ehat\|$ & Base scorer & RPE1 zero-shot & $-0.0016$ \ci{-0.0104}{+0.0142} & $0.498$ \\
+Base + random score & Base scorer & RPE1 zero-shot & $-0.0511$ \ci{-0.0578}{-0.0452} & $0.252$ \\
+\midrule
+Unit-direction targets & \ced{} & Pooled, measured & $+0.0048$ \ci{+0.0039}{+0.0056} & -- \\
+Unit-direction targets & \ced{} & Pooled, response-unseen & $+0.0042$ \ci{+0.0032}{+0.0051} & -- \\
+\bottomrule
+\end{tabular}
+\end{table}

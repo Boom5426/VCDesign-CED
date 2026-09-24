@@ -1,0 +1,28 @@
+{
+  "schema": "VCDESIGN_RELEASE_ASSETS_V1",
+  "assets": {
+    "freeze": "inputs/freeze.json",
+    "cache": "inputs/responses_ab.npy",
+    "cache_ids": "inputs/eligible_ids.npy",
+    "cache_manifest": "inputs/cache_manifest.json",
+    "string": "inputs/string_features.npz",
+    "source_goal_manifest": "inputs/source_goal_manifest.json",
+    "source_states": "inputs/source_states.npy",
+    "goal_states": "inputs/goal_states.npy",
+    "mapkg": "inputs/mapkg_features.npz",
+    "mapkg_manifest": "inputs/mapkg_manifest.json",
+    "candidate_knowledge": "inputs/candidate_knowledge.npz",
+    "candidate_knowledge_freeze": "inputs/candidate_knowledge_freeze.json"
+  },
+  "checkpoints": {
+    "M_PAIR": "inputs/comparators/m_pair_epoch_010.pt",
+    "M_SET": "inputs/comparators/m_set_epoch_010.pt"
+  },
+  "cached_scores": {
+    "FUNCTION_G_select": "inputs/comparators/function_scores_G_select.npy",
+    "M_SET_G_fit": "inputs/comparators/mset_scores_G_fit.npy",
+    "M_SET_G_select": "inputs/comparators/mset_scores_G_select.npy",
+    "PAR_REAL_G_select": "inputs/comparators/select_scores_real.npy",
+    "PAR_SHUFFLED_G_select": "inputs/comparators/select_scores_shuffled.npy"
+  }
+}

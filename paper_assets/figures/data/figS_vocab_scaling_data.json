@@ -1,0 +1,174 @@
+{
+  "schema": "VCDESIGN_SUPP_VOCAB_SCALING_DATA_V1",
+  "generated_by": "figures/scripts/build_fig3_data.py",
+  "source": {
+    "kind": "former Figure 3 vocabulary-scaling artifact",
+    "sha256": "4abc5aa3536185c37985d788d9f0947bf7323da8b62b8fde14998e044409c9f1"
+  },
+  "source_artifacts": {
+    "masking": {
+      "kind": "masking",
+      "sha256": "a6af1a32612f35e211a060e5e604a52bc54bab5e6af190f7f2faa717cb1ec34b"
+    },
+    "poolsize": {
+      "kind": "poolsize",
+      "sha256": "539d98e7e7499d698ef9356e6b4ebc25e6002b74c725c7640b58e7be33057fab"
+    },
+    "loco": {
+      "kind": "loco",
+      "sha256": "73736ef85795869f24fbd75751b5a904a7ffb1b096598145caa8f1c079330d83"
+    }
+  },
+  "scope": {
+    "estimator": "raw-target CED",
+    "metric": "paired MBRU difference over the frozen K562 base scorer",
+    "population": "K562 held out; development-split queries",
+    "reason_in_supplement": "different estimator, metric, and population from the canonical main Figure 3"
+  },
+  "panel": {
+    "statistic": "paired MBRU difference against the frozen K562 base scorer, K562 held out, development-split queries; median over three random subsamples below full class size, one run with a 95% row bootstrap interval at full class size",
+    "record_keys": "curve.{UNSEEN_CANDIDATE,SEEN_CANDIDATE}.<size>.{median_delta_MBRU,draws,median_BASE_MBRU}",
+    "class_sizes": {
+      "ALL": 7825,
+      "SEEN_CANDIDATE": 1570,
+      "UNSEEN_CANDIDATE": 6255
+    },
+    "seeds": [
+      20260918,
+      20260919,
+      20260920
+    ],
+    "response_unseen": [
+      {
+        "size": 250,
+        "median": 0.03290246962101432,
+        "draws": [
+          -0.014840423713403626,
+          0.03290246962101432,
+          0.0632005355889411
+        ],
+        "base_mbu_median": 0.30501095263033945,
+        "full_class": false,
+        "draws_disagree": true
+      },
+      {
+        "size": 500,
+        "median": 0.041569165139897814,
+        "draws": [
+          0.041569165139897814,
+          0.01244181195722431,
+          0.05722069458276504
+        ],
+        "base_mbu_median": 0.24338514826515742,
+        "full_class": false,
+        "draws_disagree": true
+      },
+      {
+        "size": 1000,
+        "median": 0.04723891647851916,
+        "draws": [
+          0.0466710920841725,
+          0.05632537665365711,
+          0.04723891647851916
+        ],
+        "base_mbu_median": 0.3522629445641873,
+        "full_class": false,
+        "draws_disagree": false
+      },
+      {
+        "size": 1570,
+        "median": 0.0198233781895457,
+        "draws": [
+          0.0198233781895457,
+          0.011499388064606647,
+          0.024214640910398037
+        ],
+        "base_mbu_median": 0.40475454946217176,
+        "full_class": false,
+        "draws_disagree": false
+      },
+      {
+        "size": 3000,
+        "median": 0.0056618488957076996,
+        "draws": [
+          0.007924532928538175,
+          0.0035847806953901995,
+          0.0056618488957076996
+        ],
+        "base_mbu_median": 0.49456751009860417,
+        "full_class": false,
+        "draws_disagree": false
+      },
+      {
+        "size": 6255,
+        "median": -0.010281249762853273,
+        "draws": [
+          -0.010281249762853273
+        ],
+        "base_mbu_median": 0.5726778471054219,
+        "full_class": true,
+        "ci95": [
+          -0.015394790523744595,
+          -0.004781059175387117
+        ]
+      }
+    ],
+    "measured": [
+      {
+        "size": 250,
+        "median": 0.01081049019177921,
+        "draws": [
+          0.024837161934463503,
+          0.002658655781505037,
+          0.01081049019177921
+        ],
+        "base_mbu_median": 0.5878730694583256,
+        "full_class": false,
+        "draws_disagree": true
+      },
+      {
+        "size": 500,
+        "median": 0.0024190096035794917,
+        "draws": [
+          0.0024190096035794917,
+          0.005210290029250497,
+          -0.001145898177631749
+        ],
+        "base_mbu_median": 0.6266635397457746,
+        "full_class": false,
+        "draws_disagree": true
+      },
+      {
+        "size": 1000,
+        "median": 0.002335753006609209,
+        "draws": [
+          0.002335753006609209,
+          0.006322779431404912,
+          -0.0007450253410917484
+        ],
+        "base_mbu_median": 0.6384970745861469,
+        "full_class": false,
+        "draws_disagree": true
+      },
+      {
+        "size": 1570,
+        "median": 0.009483984708520785,
+        "draws": [
+          0.009483984708520785
+        ],
+        "base_mbu_median": 0.6322198615873321,
+        "full_class": true,
+        "ci95": [
+          0.0065652954716649,
+          0.011979881541861359
+        ]
+      }
+    ],
+    "draws_disagree_rule": "range of the three subsample values exceeds |median|",
+    "held_context_pool_band": [
+      764,
+      1696
+    ],
+    "held_context_pool_band_rule": "smallest and largest candidate pool plotted for a held context in Figures 2C and 3A (LOCO strata and masking pools)"
+  }
+}

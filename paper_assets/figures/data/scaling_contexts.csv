@@ -1,0 +1,4 @@
+n_contexts,matched_all,matched_excl_k562,full_all,source
+1,0.01265,0.01679,0.01388,ledger 4.E 8B (matched_all and full_all: all folds; matched_excl_k562: excluding the K562 fold)
+2,0.01730,0.02263,0.01990,ledger 4.E 8B (matched_all and full_all: all folds; matched_excl_k562: excluding the K562 fold)
+3,0.01675,0.02190,0.02034,ledger 4.E 8B (matched_all and full_all: all folds; matched_excl_k562: excluding the K562 fold)

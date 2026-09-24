@@ -1,0 +1,97 @@
+{
+  "input_checksums": {
+    "assets": {
+      "cache": {
+        "bytes": 607382848,
+        "sha256": "bb48bae7f864c66b242a77cef064ff967b418d22bb11416630548f6a6d094a94"
+      },
+      "cache_ids": {
+        "bytes": 515608,
+        "sha256": "40e104ed924c109d621f15bc5bb3bf899ca89c3f14db046b5aa5ae0c4ce611a7"
+      },
+      "cache_manifest": {
+        "bytes": 993,
+        "sha256": "62bdaedc11223c408df5baa9c4cdc5177931cc5bddbb39a0855280face6457bf"
+      },
+      "candidate_knowledge": {
+        "bytes": 137415960,
+        "sha256": "7d7df19042c32c8918134425ad6a982d639abd9f7c01014239f9929b8561abfb"
+      },
+      "candidate_knowledge_freeze": {
+        "bytes": 2170,
+        "sha256": "68fe0d137e908bc4a7ab7d385bc4cf09c695028a452fee10e11c15d6fbed7925"
+      },
+      "freeze": {
+        "bytes": 173711,
+        "sha256": "4749155eba844410060bfb57c909e20a6bf447e511281562a2e8281a615d1e09"
+      },
+      "goal_states": {
+        "bytes": 607382848,
+        "sha256": "53bf0b34887085e913635c5b4770c28fd6e196310e5585963edfb2ea5f5be4e6"
+      },
+      "mapkg": {
+        "bytes": 110065002,
+        "sha256": "0fb285e600410001a31a20056b4d4ad39a43f9c17aa4f2dcfc35f61f261aff5e"
+      },
+      "mapkg_manifest": {
+        "bytes": 2907,
+        "sha256": "250a64a5fdbd94781c05db045a6e89eb04ada804c66923a681441030b260f639"
+      },
+      "source_goal_manifest": {
+        "bytes": 3653,
+        "sha256": "193db1646f6e48b9dd83355f776b3830a7113999f715d46f6bdcfd62ef08550e"
+      },
+      "source_states": {
+        "bytes": 607382848,
+        "sha256": "5b4d99ec12a6c8c0b96c8448971939e3efc94f1173e92f11cb77c4116f806bbd"
+      },
+      "string": {
+        "bytes": 65863179,
+        "sha256": "7e9b93e7a8984ab2902b3c264ba6680f7d80546c490ce430655d97f484800b02"
+      }
+    },
+    "cached_scores": {
+      "FUNCTION_G_select": {
+        "bytes": 15235328,
+        "sha256": "2d7dd2a564b25d65f2221321ccfe9c1f07a0843b2534ead450eadf2e96c42107"
+      },
+      "M_SET_G_fit": {
+        "bytes": 332304328,
+        "sha256": "455c56bcd9873c844c26af55d573d48773e73948d7d1e66cf2bb794d0a06d7f1"
+      },
+      "M_SET_G_select": {
+        "bytes": 15235328,
+        "sha256": "8c95ca5977c3f2d5a150183990fdfefa409e70466e9a0ac7bb9ed0538515f959"
+      },
+      "PAR_REAL_G_select": {
+        "bytes": 15235328,
+        "sha256": "b9bb1884bc074a7db76740f009b4957b65d729efa44d294fecf6f40edf721ed8"
+      },
+      "PAR_SHUFFLED_G_select": {
+        "bytes": 15235328,
+        "sha256": "160f4de832eadc01b9415d3c6f221f2d303c8715cb75b7ab73ed3e20e0259e47"
+      }
+    },
+    "checkpoints": {
+      "M_PAIR": {
+        "bytes": 364584058,
+        "sha256": "d230819a068abaeb21fcdeab5d0e277ce1f832158b43cd50d60e8ab3e170aeda"
+      },
+      "M_SET": {
+        "bytes": 364584058,
+        "sha256": "b5699d46db264b2d5121984ced2f763c3de81aa3ee588859fb7427a285cc8b2d"
+      }
+    }
+  },
+  "schema": "VCDESIGN_CED_FROZEN_INPUT_INDEX_V1",
+  "selected_model": {
+    "ced_penalty": 10000.0,
+    "checkpoint_sha256": "58da13d252faf9bcaa74c53345c0afc380882bdd5f410a77cfa5044f9a6e9484",
+    "epoch": 8,
+    "fusion_weight": 1.0
+  },
+  "source_records": {
+    "lock_sha256": "3a404d403de3d2495a4a92b58e2a477f438c29599a4a2b8c6286cda8d75f7f38",
+    "train_manifest_sha256": "bf3271dae2ac4285c4d21c4d6d9834d23c42d07f178b4c6d65fc1b36e8850973"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "coverage_gate": {
+    "batch_field": "batch",
+    "batch_split_rule": "SHA-256('REPLOGLE_BATCH_DISJOINT_V1|20260914|'+batch), low bit; 0=A, 1=B",
+    "batch_split_seed": 20260914,
+    "control_label": "control",
+    "eligibility": "explicit non-control perturbation identity and >=25 finite cells in each fixed batch view",
+    "feasibility_frozen": "EXECUTABLE: 9205 perturbations pass; 267/267 batches have controls",
+    "minimum_cells_per_view": 25,
+    "outcome_dependent_filtering": false,
+    "perturbation_field": "perturbation"
+  },
+  "governance": {
+    "batch_split_search": false,
+    "evaluation_v3": false,
+    "feature_search": false,
+    "k2": false,
+    "mapkg": false,
+    "model_training": false,
+    "official_dev_test": false,
+    "parent_pilot_modified_scientifically": false,
+    "posthoc_query_removal": false,
+    "threshold_search": false,
+    "wet_lab": false,
+    "x_atlas_modified": false
+  },
+  "pilot_artifact_rebuild": {
+    "cell_split_seed": 20260912,
+    "decision_reopened": false,
+    "minimum_total_cells": 50,
+    "must_match_frozen_summary": true
+  },
+  "readout": {
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260914,
+    "primary_k": 10,
+    "random_overlap_null": "K/(N-1)",
+    "reliability_strata": "descriptive within-run terciles only",
+    "secondary_k": 50
+  },
+  "response": {
+    "aggregation": "mean normalized expression",
+    "control_matching": "within each view, weighted mean of batch-specific control means over the perturbation's observed batches, weights equal perturbation cell counts per batch",
+    "cross_view_control_leakage": false,
+    "features": "all 8248 matrix var features",
+    "geometry": "cosine",
+    "normalization": "per-cell library size 10000 followed by log1p"
+  },
+  "schema": "REPLOGLE_BATCH_DISJOINT_MEASURABILITY_V1_CONFIG",
+  "source": {
+    "cells": 1989578,
+    "features": 8248,
+    "host_alias": "4090",
+    "path": "inputs/ReplogleWeissman2022_K562_gwps.h5ad",
+    "perturbations_excluding_control": 9866,
+    "sha256": "d3269d9c863d96555eba768b42ab330cc1b57493cd33b4ac8fe7fbab8278f104"
+  },
+  "status": "FROZEN_BEFORE_BATCH_DISJOINT_OUTCOME"
+}

@@ -1,0 +1,91 @@
+panel,record_type,context,condition_or_variant,x_value,y_value,value,ci95_low,ci95_high,metric,reference,owning_section,note
+a,probe_cell,development split,Q_CURRENT__C_LEGAL,0.14525184243164202,Q_CURRENT,0.14525184243164202,,,MBRU,C_LEGAL,sec:analysis,one bilinear probe scorer per factorial cell
+a,probe_cell,development split,Q_RAW__C_LEGAL,0.13314494680065558,Q_RAW,0.13314494680065558,,,MBRU,C_LEGAL,sec:analysis,one bilinear probe scorer per factorial cell
+a,probe_cell,development split,Q_CURRENT__C_ORACLE,0.6345437235865714,Q_CURRENT,0.6345437235865714,,,MBRU,C_ORACLE,sec:analysis,one bilinear probe scorer per factorial cell
+a,probe_cell,development split,Q_RAW__C_ORACLE,0.6364950071116773,Q_RAW,0.6364950071116773,,,MBRU,C_ORACLE,sec:analysis,one bilinear probe scorer per factorial cell
+a,candidate_swap,development split,Q_CURRENT,,,0.4892918811549294,,,delta MBRU,static knowledge to measured response,sec:analysis,difference of recorded cell medians
+a,candidate_swap,development split,Q_RAW,,,0.5033500603110217,,,delta MBRU,static knowledge to measured response,sec:analysis,difference of recorded cell medians
+b,plotted_level,RPE1,M_spread,,,0.01932,,,paired delta MBRU,frozen K562 base scorer,sec:analysis,same perturbation identities
+b,plotted_level,RPE1,three_M,,,0.04759,,,paired delta MBRU,frozen K562 base scorer,sec:analysis,same perturbation identities
+b,plotted_level,HepG2,M_spread,,,0.03011,,,paired delta MBRU,frozen K562 base scorer,sec:analysis,same perturbation identities
+b,plotted_level,HepG2,three_M,,,0.05075,,,paired delta MBRU,frozen K562 base scorer,sec:analysis,same perturbation identities
+b,plotted_level,Jurkat,M_spread,,,0.00687,,,paired delta MBRU,frozen K562 base scorer,sec:analysis,same perturbation identities
+b,plotted_level,Jurkat,three_M,,,0.02355,,,paired delta MBRU,frozen K562 base scorer,sec:analysis,same perturbation identities
+c,plotted_contrast,pooled,Predictive response basis,0.0009086250815539543,,0.0009086250815539543,0.0005963330100796138,0.0012947454874863984,paired delta BU@20,unit-direction ridge,sec:analysis,model
+c,plotted_contrast,pooled,Context-invariant adapter,0.000765517042807029,,0.000765517042807029,-0.00026301082934039144,0.0018657979937954125,paired delta BU@20,unit-direction ridge,sec:analysis,model
+c,plotted_contrast,pooled,"Nonlinear memory, anchored",3.607056276377918e-05,,3.607056276377918e-05,-0.0009776275291242809,0.001140990886433435,paired delta BU@20,unit-direction ridge,sec:analysis,model
+c,plotted_contrast,pooled,Nonlinear effect memory,-0.02331013574684493,,-0.02331013574684493,-0.025706710558696,-0.02079947856627999,paired delta BU@20,unit-direction ridge,sec:analysis,model
+c,plotted_contrast,pooled,Drop MAP-KG (STRING only),-0.0012912238309953153,,-0.0012912238309953153,-0.002618923622687952,-0.00020217538296346538,paired delta BU@20,unit-direction ridge,sec:analysis,information
+c,plotted_contrast,pooled,Drop STRING (MAP-KG only),-0.021053217176577016,,-0.021053217176577016,-0.02354052860120623,-0.017724847466990157,paired delta BU@20,unit-direction ridge,sec:analysis,information
+d,grid_point,RPE1,RIDGE_UNIT[K562],0.01376470432711248,0.25150521772844076,0.25150521772844076,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562
+d,grid_point,RPE1,RIDGE_UNIT[K562@matched],-0.04592916650292401,0.046077498613200235,0.046077498613200235,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562@matched
+d,grid_point,RPE1,RIDGE_UNIT[HepG2],0.16212533529971335,0.1561621905238386,0.1561621905238386,,,effect-only BU@20,MASKED evidence grid,sec:analysis,HepG2
+d,grid_point,RPE1,RIDGE_UNIT[HepG2@matched],0.16212533529971335,0.1561621905238386,0.1561621905238386,,,effect-only BU@20,MASKED evidence grid,sec:analysis,HepG2@matched
+d,grid_point,RPE1,RIDGE_UNIT[Jurkat],0.005824962767817657,0.24667676428782145,0.24667676428782145,,,effect-only BU@20,MASKED evidence grid,sec:analysis,Jurkat
+d,grid_point,RPE1,RIDGE_UNIT[Jurkat@matched],-0.01125546720853515,0.21607599585882267,0.21607599585882267,,,effect-only BU@20,MASKED evidence grid,sec:analysis,Jurkat@matched
+d,grid_point,RPE1,RIDGE_UNIT[K562+HepG2],0.0682421279521577,0.23361894042233072,0.23361894042233072,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2
+d,grid_point,RPE1,RIDGE_UNIT[K562+HepG2@matched],0.020126311215655012,0.021576886852229936,0.021576886852229936,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2@matched
+d,grid_point,RPE1,RIDGE_UNIT[K562+Jurkat],0.02299133009203644,0.21308611450173254,0.21308611450173254,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+Jurkat
+d,grid_point,RPE1,RIDGE_UNIT[K562+Jurkat@matched],-0.049314818872811333,0.12393988231907159,0.12393988231907159,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+Jurkat@matched
+d,grid_point,RPE1,RIDGE_UNIT[HepG2+Jurkat],0.09059202254140383,0.22392554609545687,0.22392554609545687,,,effect-only BU@20,MASKED evidence grid,sec:analysis,HepG2+Jurkat
+d,grid_point,RPE1,RIDGE_UNIT[HepG2+Jurkat@matched],0.06273578319280085,0.2616304782342054,0.2616304782342054,,,effect-only BU@20,MASKED evidence grid,sec:analysis,HepG2+Jurkat@matched
+d,grid_point,RPE1,RIDGE_UNIT[full],0.05662325637981144,0.2267946161971875,0.2267946161971875,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2+Jurkat
+d,grid_point,RPE1,RIDGE_UNIT[full@matched],0.007897594905906857,0.04363267150351708,0.04363267150351708,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2+Jurkat@matched
+d,grid_point,RPE1,RIDGE_UNIT[STRING_only],0.04958920956470044,0.24664760884133138,0.24664760884133138,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2+Jurkat
+d,grid_point,RPE1,RIDGE_UNIT[MAPKG_only],0.03770253343761326,0.16393589725590763,0.16393589725590763,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2+Jurkat
+d,grid_point,RPE1,RIDGE_UNIT[rank64],0.05863547814517343,0.20327147986717609,0.20327147986717609,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2+Jurkat
+d,grid_point,RPE1,RIDGE_UNIT[rank128],0.0589615486025823,0.2203151936187298,0.2203151936187298,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2+Jurkat
+d,grid_point,RPE1,RIDGE_UNIT[rank512],0.05350150977970034,0.2312571245756705,0.2312571245756705,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2+Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[K562],0.027967757651575022,0.3267633636675404,0.3267633636675404,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562
+d,grid_point,HepG2,RIDGE_UNIT[K562@matched],-0.05429401433956417,0.233876052168774,0.233876052168774,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562@matched
+d,grid_point,HepG2,RIDGE_UNIT[RPE1],0.12066492783288618,0.3611367436698314,0.3611367436698314,,,effect-only BU@20,MASKED evidence grid,sec:analysis,RPE1
+d,grid_point,HepG2,RIDGE_UNIT[RPE1@matched],0.12066492783288618,0.3611367436698314,0.3611367436698314,,,effect-only BU@20,MASKED evidence grid,sec:analysis,RPE1@matched
+d,grid_point,HepG2,RIDGE_UNIT[Jurkat],0.027396114141031075,0.2947112993323744,0.2947112993323744,,,effect-only BU@20,MASKED evidence grid,sec:analysis,Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[Jurkat@matched],0.02849378877278893,0.2670029923307054,0.2670029923307054,,,effect-only BU@20,MASKED evidence grid,sec:analysis,Jurkat@matched
+d,grid_point,HepG2,RIDGE_UNIT[K562+RPE1],0.08685275629528066,0.3780427792609171,0.3780427792609171,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1
+d,grid_point,HepG2,RIDGE_UNIT[K562+RPE1@matched],0.017861968520192693,0.21778456604185917,0.21778456604185917,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1@matched
+d,grid_point,HepG2,RIDGE_UNIT[K562+Jurkat],0.03957080709588369,0.3605800273675388,0.3605800273675388,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[K562+Jurkat@matched],-0.03673393663296309,0.17827528654596753,0.17827528654596753,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+Jurkat@matched
+d,grid_point,HepG2,RIDGE_UNIT[RPE1+Jurkat],0.11450317577353489,0.3931294482153106,0.3931294482153106,,,effect-only BU@20,MASKED evidence grid,sec:analysis,RPE1+Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[RPE1+Jurkat@matched],0.09442846959796924,0.2927185607457817,0.2927185607457817,,,effect-only BU@20,MASKED evidence grid,sec:analysis,RPE1+Jurkat@matched
+d,grid_point,HepG2,RIDGE_UNIT[full],0.08424259129260028,0.3750138387234628,0.3750138387234628,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[full@matched],0.018501545385016766,0.18823014974836258,0.18823014974836258,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+Jurkat@matched
+d,grid_point,HepG2,RIDGE_UNIT[STRING_only],0.0759369368645047,0.39664963282439836,0.39664963282439836,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[MAPKG_only],0.0548041009958286,0.24309061022260697,0.24309061022260697,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[rank64],0.09068194118615919,0.35649779915179575,0.35649779915179575,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[rank128],0.09059047690554077,0.3679232334042824,0.3679232334042824,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+Jurkat
+d,grid_point,HepG2,RIDGE_UNIT[rank512],0.07966443202232991,0.3812531379025637,0.3812531379025637,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+Jurkat
+d,grid_point,Jurkat,RIDGE_UNIT[K562],0.06115531860491177,0.31604865413605787,0.31604865413605787,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562
+d,grid_point,Jurkat,RIDGE_UNIT[K562@matched],0.02583701241691716,0.19702580544230452,0.19702580544230452,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562@matched
+d,grid_point,Jurkat,RIDGE_UNIT[RPE1],0.00752072897968359,0.2340106140577211,0.2340106140577211,,,effect-only BU@20,MASKED evidence grid,sec:analysis,RPE1
+d,grid_point,Jurkat,RIDGE_UNIT[RPE1@matched],0.0029469245849898314,0.16939408359804475,0.16939408359804475,,,effect-only BU@20,MASKED evidence grid,sec:analysis,RPE1@matched
+d,grid_point,Jurkat,RIDGE_UNIT[HepG2],0.024908531061944753,0.0957618659595135,0.0957618659595135,,,effect-only BU@20,MASKED evidence grid,sec:analysis,HepG2
+d,grid_point,Jurkat,RIDGE_UNIT[HepG2@matched],0.024908531061944753,0.0957618659595135,0.0957618659595135,,,effect-only BU@20,MASKED evidence grid,sec:analysis,HepG2@matched
+d,grid_point,Jurkat,RIDGE_UNIT[K562+RPE1],0.0653631898314462,0.3820439530138651,0.3820439530138651,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1
+d,grid_point,Jurkat,RIDGE_UNIT[K562+RPE1@matched],0.01119699818889913,0.14757885245027175,0.14757885245027175,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1@matched
+d,grid_point,Jurkat,RIDGE_UNIT[K562+HepG2],0.07240661062623231,0.3060699277323828,0.3060699277323828,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2
+d,grid_point,Jurkat,RIDGE_UNIT[K562+HepG2@matched],0.02411486774410957,0.21147235234552617,0.21147235234552617,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+HepG2@matched
+d,grid_point,Jurkat,RIDGE_UNIT[RPE1+HepG2],0.030508792505814727,0.25055675373486236,0.25055675373486236,,,effect-only BU@20,MASKED evidence grid,sec:analysis,RPE1+HepG2
+d,grid_point,Jurkat,RIDGE_UNIT[RPE1+HepG2@matched],0.019176881337372807,0.12066907740991059,0.12066907740991059,,,effect-only BU@20,MASKED evidence grid,sec:analysis,RPE1+HepG2@matched
+d,grid_point,Jurkat,RIDGE_UNIT[full],0.07507786851860608,0.3520176361840939,0.3520176361840939,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+HepG2
+d,grid_point,Jurkat,RIDGE_UNIT[full@matched],0.007251396937727323,0.1249854714272213,0.1249854714272213,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+HepG2@matched
+d,grid_point,Jurkat,RIDGE_UNIT[STRING_only],0.0646258855993107,0.38160134568420545,0.38160134568420545,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+HepG2
+d,grid_point,Jurkat,RIDGE_UNIT[MAPKG_only],0.03715246683429027,0.12038393005045306,0.12038393005045306,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+HepG2
+d,grid_point,Jurkat,RIDGE_UNIT[rank64],0.07924546925026033,0.32399519352999195,0.32399519352999195,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+HepG2
+d,grid_point,Jurkat,RIDGE_UNIT[rank128],0.07796609043389711,0.33875745110598005,0.33875745110598005,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+HepG2
+d,grid_point,Jurkat,RIDGE_UNIT[rank512],0.06849918907702769,0.3668242968337838,0.3668242968337838,,,effect-only BU@20,MASKED evidence grid,sec:analysis,K562+RPE1+HepG2
+d,controlled_change,RPE1,rank64_vs_full,0.0020122217653619837,-0.023523136330011407,-0.023523136330011407,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,RPE1,rank128_vs_full,0.002338292222770856,-0.006479422578457683,-0.006479422578457683,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,RPE1,rank512_vs_full,-0.0031217466001111013,0.004462508378482999,0.004462508378482999,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,RPE1,STRING_only_vs_full,-0.007034046815111002,0.01985299264414389,0.01985299264414389,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,RPE1,MAPKG_only_vs_full,-0.01892072294219818,-0.06285871894127987,-0.06285871894127987,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=True
+d,controlled_change,HepG2,rank64_vs_full,0.006439349893558904,-0.01851603957166703,-0.01851603957166703,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,HepG2,rank128_vs_full,0.006347885612940488,-0.007090605319180376,-0.007090605319180376,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,HepG2,rank512_vs_full,-0.004578159270270374,0.006239299179100932,0.006239299179100932,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,HepG2,STRING_only_vs_full,-0.008305654428095582,0.02163579410093558,0.02163579410093558,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,HepG2,MAPKG_only_vs_full,-0.02943849029677168,-0.1319232285008558,-0.1319232285008558,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=True
+d,controlled_change,Jurkat,rank64_vs_full,0.004167600731654245,-0.02802244265410192,-0.02802244265410192,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,Jurkat,rank128_vs_full,0.0028882219152910338,-0.013260185078113829,-0.013260185078113829,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,Jurkat,rank512_vs_full,-0.006578679441578389,0.01480666064968994,0.01480666064968994,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,Jurkat,STRING_only_vs_full,-0.010451982919295374,0.029583709500111577,0.029583709500111577,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=False
+d,controlled_change,Jurkat,MAPKG_only_vs_full,-0.03792540168431581,-0.23163370613364082,-0.23163370613364082,,,delta effect-only BU@20,within-atlas full specification,sec:analysis,same_sign=True

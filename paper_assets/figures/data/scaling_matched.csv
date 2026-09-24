@@ -1,0 +1,5 @@
+held,idx,same_ids_3x,spread_3ctx,best_single,best_single_ctx,source
+RPE1,1,0.04759,0.01932,0.03404,Jurkat,ledger 4.E 8C
+HepG2,2,0.05075,0.03011,0.03490,Jurkat,ledger 4.E 8C
+Jurkat,3,0.02355,0.00687,0.01222,RPE1,ledger 4.E 8C
+K562,4,0.00445,-0.00006,0.00078,Jurkat,ledger 4.E 8C (not plotted: base scorer trained on K562)

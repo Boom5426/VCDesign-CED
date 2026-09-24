@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vcdesign-ced"
+version = "0.1.0"
+description = "Candidate-conditioned inverse modeling for cellular intervention design"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = ["numpy>=1.26,<2"]
+keywords = ["single-cell", "perturbation", "intervention design", "inverse modeling"]
+
+[project.optional-dependencies]
+model = ["scipy>=1.15,<2", "torch>=2.4,<2.5"]
+data = ["anndata>=0.11,<0.12", "pandas>=1.5,<2", "scikit-learn>=1.5,<2"]
+figures = ["matplotlib>=3.9,<4", "scipy>=1.15,<2"]
+dev = ["pytest>=8.3,<9"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["gene_open_inverse*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"*" = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["src/gene_open_inverse"]

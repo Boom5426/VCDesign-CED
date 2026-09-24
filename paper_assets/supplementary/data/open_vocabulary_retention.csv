@@ -1,0 +1,10 @@
+method,context,seen,masked,retention
+VCDesign-CED gain over BASE,RPE1,0.0691,0.0526,0.76
+VCDesign-CED gain over BASE,HepG2,0.0672,0.0698,1.04
+VCDesign-CED gain over BASE,Jurkat,0.0434,0.039,0.9
+Internal forward-then-match BU@20,RPE1,0.326,0.227,0.7
+Internal forward-then-match BU@20,HepG2,0.427,0.375,0.88
+Internal forward-then-match BU@20,Jurkat,0.438,0.352,0.8
+RIDGE_UNIT K562-atlas BU@20,RPE1,0.285,0.253,0.89
+RIDGE_UNIT K562-atlas BU@20,HepG2,0.375,0.334,0.89
+RIDGE_UNIT K562-atlas BU@20,Jurkat,0.389,0.315,0.81
