@@ -1,5 +1,0 @@
-scope,regime,comparison_count,statistic,value,p_value,note
-57-point evidence grid,MASKED,57,Spearman correlation,0.61,4.6e-07,held-context prediction quality versus effect-only design
-57-point evidence grid,SEEN,57,Spearman correlation,0.645,,held-context prediction quality versus effect-only design
-within-atlas input variants,MASKED,15,sign agreement fraction,0.2,,3 of 15 prediction and design changes agree in sign
-within-atlas input variants,SEEN,15,sign agreement fraction,0.6,,9 of 15 prediction and design changes agree in sign

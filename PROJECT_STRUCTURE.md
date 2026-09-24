@@ -1,46 +1,30 @@
 # Project structure
 
-The release has two layers: the frozen Python implementation of VCDesign-CED,
-and compact source data and generators for the manuscript displays. Large public
-input matrices and compute artifacts are outside the package; their checksums and
-required roles are recorded under `configs/`.
-
 ```text
-src/gene_open_inverse/   model, data builders, evaluation, baseline adaptations
-examples/                synthetic software demonstration; no paper result
-configs/                 portable asset template and frozen input checksums
-paper_assets/            figure and table source data, generators, editable Figure 1
-provenance/              source snapshot hashes and packaging transformations
-tools/                   read-only package and processed-data audits
-requirements.txt         reference environment, excluding hardware-specific PyTorch
-pyproject.toml           installable package metadata and workflow extras
-DATA_SOURCES.md          public input locations and required source variants
-RELEASE_STATUS.md        remaining gates for an anonymous submission archive
+src/gene_open_inverse/
+├── candidate_effect_distillation_v1/  Candidate Effect Distillation
+├── final_clean_model_v1/              final base scorer, selection, locked evaluation
+├── four_context_v1/                   K562/RPE1/HepG2/Jurkat data contracts
+├── external_baselines_v1/             comparator adapters and reporting
+├── open_vocab_generalization_v1/      masking and open-vocabulary analyses
+└── model/                             frozen knowledge features and model components
+
+configs/                               portable asset paths and paper-run configuration
+examples/                              synthetic CED demonstration
+tools/                                 processed-data SHA-256 verification
+paper/                                 final manuscript PDF
 ```
 
-The module hierarchy preserves the frozen research code so that experimental
-definitions, seeds, data roles, and imports remain traceable. Each copied file's
-source and release hash appears in `provenance/SOURCE_MAP.tsv`. Five Python input
-defaults were changed to relative paths. The two knowledge-feature configuration
-snapshots still contain unresolved research environment variables and are not
-executable release configurations; see `provenance/TRANSFORMS.md` and
-`RELEASE_STATUS.md`.
+## Main entry points
 
-## Entry points
+| Task | Entry point |
+|---|---|
+| Synthetic end-to-end check | `python3 examples/ced_demo.py` |
+| Protocol tests | `python3 -m pytest -q` |
+| Train the final base scorer | `python3 -m gene_open_inverse.final_clean_model_v1.train` |
+| Candidate Effect Distillation | `python3 -m gene_open_inverse.candidate_effect_distillation_v1.run` |
+| Four-context processing | `python3 -m gene_open_inverse.four_context_v1.build` |
+| External-baseline reports | `python3 -m gene_open_inverse.external_baselines_v1.tables` |
 
-| Task | Module or file | Inputs |
-|---|---|---|
-| K562 preprocessing | `model/replogle_batch_disjoint_measurability_v1` | Public K562 screen |
-| RPE1 preprocessing | `external_context_v1/build.py` | Public RPE1 screen |
-| HepG2/Jurkat preprocessing | `four_context_v1/build.py` | GSE264667 screens |
-| Candidate features | `model/candidate_knowledge_v1`, `model/mapkg_candidate_adjudication_v1` | STRING, MAP-KG, ESM-2 assets |
-| Base scorer train/select | `final_clean_model_v1/train.py`, `select.py` | Frozen asset configuration |
-| Candidate Effect Distillation | `candidate_effect_distillation_v1` | Training responses and knowledge |
-| Held-context evaluation | `four_context_v1`, `open_vocab_generalization_v1` | Processed packs and frozen scorer |
-| External baselines | `external_baselines_v1` | Public method software and frozen packs |
-| Table and figure data | `paper_assets/figures/scripts`, `paper_assets/supplementary/scripts` | Bundled derived records |
-
-The original research modules have several phase-specific command lines. Use
-`python -m <module> --help` to inspect a stage, then supply explicit input and
-new output paths. The full run-to-paper command index is still pending in
-`RELEASE_STATUS.md`.
+Use explicit input and new output paths for all long-running stages. The complete
+command sequence is in [REPRODUCE.md](REPRODUCE.md).

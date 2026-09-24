@@ -2,86 +2,75 @@
 
 ### Candidate-conditioned inverse modeling for cellular intervention design
 
-VCDesign ranks candidate interventions for a requested cellular transition under
-a finite experimental budget. When a candidate has no measured response,
-VCDesign-CED predicts its effect from STRING and MAP-KG knowledge and combines
-goal alignment with a direct candidate scorer. The released code also contains
-the batch-disjoint measurement construction, held-context and response-masking
-evaluations, and the adapters used for the paper's external comparators.
+VCDesign ranks candidate cellular interventions for a requested transition under
+a finite experimental budget. VCDesign-CED augments a direct candidate scorer
+with Candidate Effect Distillation: it predicts the response of an unmeasured
+candidate from static biological knowledge and scores its alignment with the
+requested transition.
 
-**Submission staging status:** the code and figure-level source data are assembled,
-but the frozen compute artifacts and full run-to-paper trace are still being
-prepared. See [RELEASE_STATUS.md](RELEASE_STATUS.md). This directory is not yet
-the anonymous supplementary upload.
+[Paper](paper/VCDesign.pdf) · [Processed data and frozen artifacts](https://huggingface.co/datasets/Boom5426/VCDesign) · [Project structure](PROJECT_STRUCTURE.md) · [Reproduction guide](REPRODUCE.md)
+
+## Highlights
+
+- Candidate-conditioned intervention ranking over variable candidate sets.
+- Static STRING and MAP-KG knowledge for candidates without measured responses.
+- K562, RPE1, HepG2, and Jurkat Perturb-seq evaluation settings.
+- Frozen processed inputs, checkpoints, and run records released separately from
+  the source code.
 
 ## Quick start
 
-Python 3.11 is required. Install a PyTorch 2.4 build appropriate for your
-machine, then install the package and run the synthetic example:
+Python 3.11 and a PyTorch 2.4 build appropriate for the local CUDA system are
+required. From the repository root:
 
 ```bash
-python3 -m pip install -e ".[model,data,figures,dev]"
+python3 -m pip install -e ".[model,data,dev]"
 python3 examples/ced_demo.py
 python3 -m pytest -q
 ```
 
-The demo uses simulated features and responses to exercise response-basis
-construction, ridge effect prediction, and unit-weight score fusion. Its ranking
-is a software check, not a biological result.
+The demo uses synthetic data and checks response-basis construction, ridge effect
+prediction, and score fusion. It is a software smoke test, not a biological
+result.
 
-## Use and reproduce
+## Run with released data
 
-| Goal | Entry point | Inputs |
-|---|---|---|
-| Inspect the method | `src/gene_open_inverse/final_clean_model_v1/` and `candidate_effect_distillation_v1/` | Code only |
-| Check method contracts | `python3 -m pytest -q` | Synthetic fixtures |
-| Rebuild the main figure data | `paper_assets/figures/scripts/build_display_v2_data.py` | Bundled frozen row-level data |
-| Check supplementary tables | `paper_assets/supplementary/scripts/export_external_closure.py --check` | Bundled closure JSON and CSVs |
-| Retrain or re-evaluate the paper model | Stage modules under `src/gene_open_inverse/` | Public screens, knowledge assets, frozen configurations |
-
-The full paper pipeline uses public K562 and RPE1 CRISPRi screens, HepG2 and
-Jurkat screens from GEO GSE264667, STRING v12.0, and released MAP-KG and ESM-2
-assets. Large input matrices and model checkpoints are outside this staging
-directory. [DATA_SOURCES.md](DATA_SOURCES.md) identifies the public releases and
-exact screen variants. `configs/asset_config.example.json` gives the loader's required keys;
-`configs/frozen_input_checksums.json` records checksums and sizes for the frozen
-inputs and the selected epoch-8 checkpoint. Match each staged input to its
-checksum before an evaluation run. Once a processed-data snapshot has been
-downloaded, run `python3 tools/verify_processed_data.py --root <data-root>`.
-The paths in the example configuration are placeholders, not the paths used on
-the compute host.
-
-### Rebuild the numerical display data
-
-Run from `paper_assets/`. Choose new output filenames; the builder refuses to
-overwrite them by default.
+The processed data, frozen feature matrices, reference checkpoint, and run
+records are hosted in the companion Hugging Face dataset. Download them into the
+repository root, then verify every released byte before running the model:
 
 ```bash
-python3 figures/scripts/build_display_v2_data.py \
-  --output /tmp/vcdesign-display-v2.json \
-  --source-csv /tmp/vcdesign-display-v2.csv
-sha256sum figures/data/display_v2_data.json figures/data/display_v2_source_data.csv
-python3 supplementary/scripts/export_external_closure.py \
-  --source supplementary/data/external_baseline_closure_v1.json \
-  --out-dir supplementary/data --check
-sha256sum -c supplementary/data/SHA256SUMS
+python3 -m pip install "huggingface_hub>=0.35"
+hf download Boom5426/VCDesign --repo-type dataset --local-dir . \
+  --include 'inputs/**' 'checkpoints/**' 'records/**' 'DATA_MANIFEST.json'
+python3 tools/verify_processed_data.py --root .
 ```
 
-The packaged figure builder reproduced the two bundled display-data files
-byte-for-byte in a separate output directory. Main figure plotting scripts and
-the editable Figure 1 source are in `paper_assets/figures/`. Table bodies and
-row-level source data are also included there. See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
-for the module map.
+The core training configuration is `configs/paper_run_v1.json`. It resolves
+inputs relative to the repository root and records the selected epoch-8 reference
+checkpoint. See [REPRODUCE.md](REPRODUCE.md) for the training command and
+expected artifacts.
 
-## Package integrity and anonymity
+## Data sources
 
-`provenance/SOURCE_MAP.tsv` records the release checksum and source location of
-each copied file. `provenance/TRANSFORMS.md` lists the input-path changes made
-for portability. `provenance/PACKAGE_SHA256SUMS` covers every staged package file.
-Run `python3 tools/audit_release.py` before making an archive. The audit checks
-snapshot and package hashes, text for machine paths or identity strings, and
-embedded Office XML. Inspect the final archive and its metadata as well.
+The processed release is derived from public K562 and RPE1 Perturb-seq screens,
+GEO GSE264667 HepG2/Jurkat screens, STRING v12.0, MAP-KG, and ESM-2. Exact
+source versions, required variants, and citations are listed in
+[DATA_SOURCES.md](DATA_SOURCES.md).
 
-The double-blind submission should use an anonymous supplementary archive or
-anonymous repository. A named backup repository can be used after the package
-is ready, but its owner link must not appear in review materials.
+## Repository layout
+
+```text
+src/gene_open_inverse/   VCDesign-CED models, preprocessing, and evaluation code
+configs/                 portable and frozen run configurations
+examples/                synthetic end-to-end demo
+tools/                   processed-data integrity checker
+paper/                   final manuscript PDF
+```
+
+## Notes
+
+The processed data release includes the bytes needed to validate the frozen
+training inputs and run the primary training pipeline. Large raw H5AD source
+matrices remain available from their original public repositories. The final
+manuscript documents the experimental protocol and results.

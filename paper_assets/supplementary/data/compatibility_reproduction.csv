@@ -1,4 +1,0 @@
-method,candidate_response_required,unseen_candidate_supported,masked_status,seen_status,core_change_required,reproduction_status,paper_treatment,note
-CellNavi,true,false,NOT_FAIRLY_COMPATIBLE,COMPATIBLE_WITH_INTERFACE_ADAPTER_ONLY,false,passed,SEEN companion only,Released tutorial reproduced at accuracy 0.5101 and weighted F1 0.4979 against 0.510 and 0.498.
-GEARS,false,true,COMPATIBLE_WITH_INTERFACE_ADAPTER_ONLY,COMPATIBLE_WITH_INTERFACE_ADAPTER_ONLY,false,headline metric matched; test-composition gate failed,degenerate companion,Current cell-gears 0.1.2 drops seven Norman conditions; all six contract fits are candidate-invariant.
-PDGrapher,false,true,PDGRAPHER_NOT_DIRECTLY_COMPATIBLE,PDGRAPHER_NOT_DIRECTLY_COMPATIBLE,true,not run,excluded after compatibility audit,"Only 4861 of 10716 PPI nodes lie on G_4, and RPE1 has no mutation vector required by the genetic mode."

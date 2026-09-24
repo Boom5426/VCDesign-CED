@@ -4,6 +4,9 @@ __pycache__/
 .venv/
 outputs/
 inputs/
+checkpoints/
+records/
+DATA_MANIFEST.json
 *.h5ad
 *.npz
 *.npy

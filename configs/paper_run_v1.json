@@ -1,5 +1,5 @@
 {
-  "schema": "VCDESIGN_RELEASE_ASSETS_V1",
+  "schema": "VCDESIGN_PAPER_RUN_V1",
   "assets": {
     "freeze": "inputs/freeze.json",
     "cache": "inputs/responses_ab.npy",
@@ -15,8 +15,21 @@
     "candidate_knowledge_freeze": "inputs/candidate_knowledge_freeze.json"
   },
   "checkpoints": {
-    "M_PAIR": "inputs/comparators/m_pair_epoch_010.pt",
-    "M_SET": "inputs/comparators/m_set_epoch_010.pt"
+    "M_PAIR": {
+      "path": "inputs/comparators/m_pair_epoch_010.pt",
+      "epoch": 10,
+      "rule": "frozen GOKA final config endpoint"
+    },
+    "M_SET": {
+      "path": "inputs/comparators/m_set_epoch_010.pt",
+      "epoch": 10,
+      "rule": "frozen GOKA final config endpoint"
+    },
+    "FINAL_CLEAN_EPOCH_008": {
+      "path": "checkpoints/final_clean_epoch_008.pt",
+      "epoch": 8,
+      "rule": "selected for CLEAN_BASE and CLEAN_EFFECT"
+    }
   },
   "cached_scores": {
     "FUNCTION_G_select": "inputs/comparators/function_scores_G_select.npy",
@@ -24,5 +37,7 @@
     "M_SET_G_select": "inputs/comparators/mset_scores_G_select.npy",
     "PAR_REAL_G_select": "inputs/comparators/select_scores_real.npy",
     "PAR_SHUFFLED_G_select": "inputs/comparators/select_scores_shuffled.npy"
-  }
+  },
+  "data_manifest": "DATA_MANIFEST.json",
+  "selected_checkpoint_sha256": "58da13d252faf9bcaa74c53345c0afc380882bdd5f410a77cfa5044f9a6e9484"
 }
