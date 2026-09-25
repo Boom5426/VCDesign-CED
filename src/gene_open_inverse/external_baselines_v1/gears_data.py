@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build GEARS's training AnnData from K562 ``G_fit`` single cells (runs in the ``boom`` env).
+"""Build GEARS's training AnnData from K562 ``G_fit`` single cells (runs in the project environment).
 
 Only anchor ``G_fit`` identities (the rows ``RIDGE_UNIT`` may train on in K562) that lie in GEARS's
 default perturbation graph are kept, each capped at ``GEARS_CELLS_PER_IDENTITY`` cells chosen by a

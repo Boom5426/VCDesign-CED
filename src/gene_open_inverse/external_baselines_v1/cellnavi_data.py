@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CellNavi input files for one held context (runs in the ``boom`` env).
+"""CellNavi input files for one held context (runs in the project environment).
 
 Training file: raw-count cells of every identity the held context's ``RIDGE_UNIT`` SEEN fit may train
 on (K562: anchor ``G_fit``; RPE1, HepG2, Jurkat: every usable identity), from the three training

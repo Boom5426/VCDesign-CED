@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """GEARS's information-matched internal twin: the frozen A1 recipe on the K562-only atlas, masked
-with exactly GEARS's fold-union masks (runs in the ``boom`` env).
+with exactly GEARS's fold-union masks (runs in the project environment).
 
 The SEEN fit must equal the evidence run's saved K562-only spec to 1e-10 before anything is kept.
 """

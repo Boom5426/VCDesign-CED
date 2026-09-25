@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unified contract V1 evaluation of every arm (runs in the ``boom`` env).
+"""Unified contract V1 evaluation of every arm (runs in the project environment).
 
 Every arm is graded on the same queries, the same C-016 stratum, the same self-exclusion, the same
 utilities, budgets, tie rule and query-gene cluster bootstrap.  VCDesign is read from C-018's saved
