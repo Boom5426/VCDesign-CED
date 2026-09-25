@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VCDesign formulates cellular intervention design as finite-budget ranking over a variable candidate set.">
+  <meta name="theme-color" content="#072f3a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VCDesign-CED — Cellular intervention design">
+  <meta property="og:description" content="Rank the experiments worth running, including candidates whose perturbational responses have not yet been measured.">
+  <meta property="og:image" content="https://boom5426.github.io/VCDesign-CED/assets/vcdesign_overview.png">
+  <meta property="og:image:alt" content="VCDesign framework and Candidate Effect Distillation overview">
+  <link rel="canonical" href="https://boom5426.github.io/VCDesign-CED/">
+  <title>VCDesign-CED — Cellular intervention design</title>
+  <link rel="icon" href="assets/site/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site/vcdesign.css">
+  <script src="assets/site/vcdesign.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav-wrap">
+      <a class="brand" href="#top" aria-label="VCDesign home">
+        <span class="brand-mark">V</span>
+        <span class="brand-name">VCDesign</span>
+        <span class="brand-note">cellular intervention design</span>
+      </a>
+      <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false">Menu</button>
+      <nav id="site-nav" aria-label="Main navigation">
+        <a href="#framework">Framework</a>
+        <a href="#ced">CED</a>
+        <a href="#evaluation">Evaluation</a>
+        <a href="#software">Software</a>
+        <a href="#data">Data</a>
+        <a href="#paper">Paper</a>
+        <a class="external-link" href="https://github.com/Boom5426/VCDesign-CED" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker">VCDesign / candidate-conditioned inverse modeling</p>
+        <h1>Design the experiment, not just the prediction.</h1>
+        <p class="hero-lead">Rank a feasible intervention set toward a desired cellular state under a finite experimental budget.</p>
+        <p class="hero-description">VCDesign evaluates models by the utility of the experiments they prioritize. VCDesign-CED extends that decision to response-unseen candidates by predicting perturbational effects from static biological knowledge.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="paper/VCDesign.pdf" target="_blank" rel="noopener">Read the paper <span>↗</span></a>
+          <a class="button data-button" href="https://huggingface.co/datasets/Boom5426/VCDesign" target="_blank" rel="noopener noreferrer">Get data &amp; artifacts <span>↗</span></a>
+        </div>
+        <div class="hero-meta" aria-label="Project summary">
+          <span><strong>4</strong> cellular contexts</span>
+          <span><strong>top-B</strong> finite-budget selection</span>
+          <span><strong>2</strong> static knowledge sources</span>
+          <span><strong>162</strong> protocol tests</span>
+        </div>
+      </div>
+
+      <figure class="figure-shell">
+        <div class="figure-head"><span>Framework overview</span><span>Figure 1</span></div>
+        <a href="paper/VCDesign.pdf" target="_blank" rel="noopener">
+          <img src="assets/vcdesign_overview.png" alt="VCDesign finite-budget ranking, outcome-based evaluation, and Candidate Effect Distillation for response-unseen deployment">
+        </a>
+        <figcaption>Prediction maps an intervention to an outcome. VCDesign instead ranks a supplied candidate set and evaluates the selected experiments by independently measured outcomes.</figcaption>
+      </figure>
+    </section>
+
+    <section class="principle">
+      <div class="wrap principle-inner">
+        <span class="principle-label">Core principle</span>
+        <p>Useful outcomes, not identity recovery.</p>
+      </div>
+    </section>
+
+    <section class="wrap section" id="framework">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">01 / Framework</span>
+          <h2>Make the downstream experimental decision explicit.</h2>
+        </div>
+        <p class="section-intro">A design problem starts with a source state, a target state, the candidates that can actually be tested, and the number of experiments the budget permits. VCDesign turns those ingredients into one shared ranking interface.</p>
+      </div>
+
+      <div class="step-grid">
+        <article class="step-card">
+          <span class="step-number">01</span>
+          <h3>Specify the transition</h3>
+          <p>Represent the cellular source state and the desired target state without assuming a single correct intervention identity.</p>
+          <span class="step-tag">source → target</span>
+        </article>
+        <article class="step-card">
+          <span class="step-number">02</span>
+          <h3>Rank feasible candidates</h3>
+          <p>Apply one shared scorer to a variable candidate set, then return the top-B prefix allowed by the experimental budget.</p>
+          <span class="step-tag">candidates → ranking</span>
+        </article>
+        <article class="step-card">
+          <span class="step-number">03</span>
+          <h3>Grade the decision</h3>
+          <p>Exclude the query identity and evaluate selected candidates using independently measured held-out outcomes.</p>
+          <span class="step-tag">outcomes → utility</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="regime-section" id="ced">
+      <div class="wrap section">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">02 / Information regime</span>
+            <h2>Choose the solver that matches what is known at decision time.</h2>
+          </div>
+          <p class="section-intro">Measured responses provide direct evidence when they exist. CED addresses the prospective setting in which a candidate must be prioritized before its own perturbational response is available.</p>
+        </div>
+
+        <div class="regime-tabs" role="tablist" aria-label="Candidate information regimes">
+          <button class="regime-tab active" data-regime="measured" role="tab" aria-selected="true">
+            <span>Measured response available</span><strong>Direct retrieval</strong>
+          </button>
+          <button class="regime-tab" data-regime="unseen" role="tab" aria-selected="false">
+            <span>Response not yet measured</span><strong>VCDesign-CED</strong>
+          </button>
+        </div>
+
+        <div class="regime-panel" role="tabpanel" aria-live="polite">
+          <div>
+            <p class="eyebrow" id="regime-eyebrow">Measured-response regime</p>
+            <h3 id="regime-title">Use the observed candidate effect directly.</h3>
+            <p id="regime-copy">When candidate responses have already been profiled, response-profile retrieval is the more direct source of evidence for alignment with the requested transition.</p>
+          </div>
+          <div class="flow" id="regime-flow" aria-label="Measured response scoring flow">
+            <span>candidate response</span><i>→</i><span>target alignment</span><i>→</i><span>ranked candidates</span>
+          </div>
+        </div>
+
+        <div class="ced-pipeline">
+          <div class="pipeline-label">
+            <span>Candidate Effect Distillation</span>
+            <small>response-unseen deployment</small>
+          </div>
+          <div class="pipeline-steps">
+            <div><b>Historical atlas</b><span>measured perturbation responses</span></div>
+            <i>+</i>
+            <div><b>Candidate knowledge</b><span>STRING and MAP-KG</span></div>
+            <i>→</i>
+            <div class="accent"><b>Predicted effect</b><span>ridge map in a response basis</span></div>
+            <i>→</i>
+            <div><b>Design score</b><span>base compatibility + effect alignment</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="evaluation">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">03 / Evaluation</span>
+          <h2>Separate context transfer from response-unseen transfer.</h2>
+        </div>
+        <p class="section-intro">VCDesign is evaluated across four CRISPRi Perturb-seq contexts. The protocol keeps the candidate pool, response availability, held-out outcomes, budget, and identity exclusions explicit.</p>
+      </div>
+
+      <div class="context-grid" aria-label="Evaluation contexts">
+        <article><strong>K562</strong><span>Primary genome-scale setting</span></article>
+        <article><strong>RPE1</strong><span>Cross-context evaluation</span></article>
+        <article><strong>HepG2</strong><span>External cellular context</span></article>
+        <article><strong>Jurkat</strong><span>External cellular context</span></article>
+      </div>
+
+      <div class="evaluation-note">
+        <span class="note-mark">B</span>
+        <div>
+          <h3>One ranking, multiple experimental budgets.</h3>
+          <p>The top-B prefix makes the budget part of the decision rather than an afterthought. Outcome-based evaluation then measures the utility of the experiments selected under that budget.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="software-section" id="software">
+      <div class="wrap section">
+        <div class="software-grid">
+          <div class="software-copy">
+            <span class="section-kicker">04 / Software</span>
+            <h2>Run the complete synthetic path without downloading an atlas.</h2>
+            <p>The bundled demo checks response-basis construction, ridge effect prediction, missing-knowledge handling, and score fusion. Its outputs are software checks, not biological results.</p>
+            <div class="software-links">
+              <a href="https://github.com/Boom5426/VCDesign-CED/blob/main/REPRODUCE.md" target="_blank" rel="noopener noreferrer"><span>Reproduction guide</span><span>↗</span></a>
+              <a href="https://github.com/Boom5426/VCDesign-CED/blob/main/PROJECT_STRUCTURE.md" target="_blank" rel="noopener noreferrer"><span>Project structure</span><span>↗</span></a>
+              <a href="https://github.com/Boom5426/VCDesign-CED/blob/main/DATA_SOURCES.md" target="_blank" rel="noopener noreferrer"><span>Data provenance</span><span>↗</span></a>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-toolbar"><span>Quick start · Python 3.11</span><button class="copy-button" data-copy-target="quickstart">Copy</button></div>
+            <pre id="quickstart"><code>git clone https://github.com/Boom5426/VCDesign-CED.git
+cd VCDesign-CED
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[model,data,dev]"
+python examples/ced_demo.py
+python -m pytest -q</code></pre>
+            <p>Expected repository test result: 162 passed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="data-section" id="data">
+      <div class="wrap section">
+        <div class="data-layout">
+          <div>
+            <span class="section-kicker">05 / Data &amp; artifacts</span>
+            <h2>Frozen inputs and run records live on Hugging Face.</h2>
+            <p class="section-intro">The companion dataset contains processed feature matrices, four-context packs, comparator scores, the selected checkpoint, evaluation records, and a SHA-256 manifest.</p>
+            <a class="dataset-link" href="https://huggingface.co/datasets/Boom5426/VCDesign" target="_blank" rel="noopener noreferrer">
+              <span class="hf-mark">HF</span>
+              <span><small>Hugging Face dataset</small><strong>Boom5426/VCDesign</strong></span>
+              <span class="dataset-arrow">↗</span>
+            </a>
+          </div>
+          <div class="artifact-list">
+            <div><span>01</span><p><strong>Processed inputs</strong>Frozen response, STRING, MAP-KG, and candidate-knowledge arrays.</p></div>
+            <div><span>02</span><p><strong>Reference checkpoint</strong>The selected epoch-8 final-clean model checkpoint.</p></div>
+            <div><span>03</span><p><strong>Run records</strong>Selection, evaluation, external-baseline, and verification manifests.</p></div>
+            <div><span>04</span><p><strong>Integrity manifest</strong>Byte sizes and SHA-256 digests for the released snapshot.</p></div>
+          </div>
+        </div>
+        <div class="download-bar">
+          <code id="download-command">hf download Boom5426/VCDesign --repo-type dataset --local-dir .</code>
+          <button class="copy-button light" data-copy-target="download-command">Copy command</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="paper">
+      <div class="paper-layout">
+        <div class="paper-mark"><span>V</span><small>ICLR 2027 submission</small></div>
+        <div class="paper-copy">
+          <span class="section-kicker">06 / Paper</span>
+          <h2>VCDesign: Candidate-Conditioned Inverse Modeling for Cellular Intervention Design</h2>
+          <p>The manuscript defines the design task, response-availability regimes, evaluation protocol, comparator settings, and controlled diagnosis of transferable design.</p>
+          <div class="resource-links">
+            <a class="button primary" href="paper/VCDesign.pdf" target="_blank" rel="noopener">Paper PDF <span>↗</span></a>
+            <a class="button secondary" href="https://github.com/Boom5426/VCDesign-CED" target="_blank" rel="noopener noreferrer">Source code <span>↗</span></a>
+            <a class="button secondary" href="https://huggingface.co/datasets/Boom5426/VCDesign" target="_blank" rel="noopener noreferrer">Data &amp; artifacts <span>↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>VCDesign-CED · From predicting responses to prioritizing experiments.</p>
+      <div class="footer-links">
+        <a href="https://github.com/Boom5426/VCDesign-CED">GitHub</a>
+        <a href="https://huggingface.co/datasets/Boom5426/VCDesign">Hugging Face</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

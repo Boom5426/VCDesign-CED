@@ -6,6 +6,7 @@
 <h3>Candidate-conditioned inverse modeling for cellular intervention design</h3>
 
 <p>
+  <a href="https://boom5426.github.io/VCDesign-CED/"><img alt="Project website" src="https://img.shields.io/badge/project-website-082D39?logo=githubpages&logoColor=white"></a>
   <img alt="Single-cell" src="https://img.shields.io/badge/scope-single--cell-7B61FF?logo=cell&logoColor=white">
   <img alt="Intervention design" src="https://img.shields.io/badge/task-intervention%20design-008C95?logo=target&logoColor=white">
   <a href="pyproject.toml"><img alt="Python 3.11" src="https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white"></a>
@@ -16,6 +17,7 @@
 <p><strong>Rank the experiments worth running, not just the intervention identity.</strong></p>
 
 <p>
+  <a href="https://boom5426.github.io/VCDesign-CED/">🌐 Project website</a> ·
   <a href="#quick-start">🚀 Quick start</a> ·
   <a href="#how-it-works">🧭 How it works</a> ·
   <a href="https://huggingface.co/datasets/Boom5426/VCDesign">🤗 Data</a> ·
@@ -26,15 +28,6 @@
 </div>
 
 **VCDesign** formulates cellular intervention design as finite-budget ranking over a variable candidate set. Given a source state, a desired target state, feasible candidates, and a budget, it prioritizes candidates by the utility of their independently measured outcomes. **VCDesign-CED** extends this setting to candidates whose perturbational responses have not yet been measured.
-
-<table align="center">
-  <tr>
-    <td align="center" width="25%"><h3>4</h3><sub>cellular<br>contexts</sub></td>
-    <td align="center" width="25%"><h3>2</h3><sub>static knowledge<br>sources</sub></td>
-    <td align="center" width="25%"><h3>top-B</h3><sub>finite-budget<br>selection</sub></td>
-    <td align="center" width="25%"><h3>162</h3><sub>protocol<br>tests</sub></td>
-  </tr>
-</table>
 
 <p align="center">
   <a href="paper/VCDesign.pdf"><img src="assets/vcdesign_overview.png" alt="VCDesign framework: finite-budget candidate ranking, outcome-based evaluation, and Candidate Effect Distillation for response-unseen deployment" width="960"></a>
@@ -129,6 +122,21 @@ The deployment candidate's measured response is never an input. Candidates missi
 | **Jurkat** | CRISPRi Perturb-seq | External cellular context |
 
 Exact source versions, variants, and citations are listed in [DATA_SOURCES.md](DATA_SOURCES.md).
+
+## 🤗 Data & frozen artifacts
+
+The processed feature matrices, four-context packs, comparator scores, selected checkpoint, run records, and SHA-256 manifest are hosted in the companion dataset:
+
+<p align="center">
+  <a href="https://huggingface.co/datasets/Boom5426/VCDesign"><img alt="Open Boom5426/VCDesign on Hugging Face" src="https://img.shields.io/badge/Open_dataset-Boom5426%2FVCDesign-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black&labelColor=332D00"></a>
+</p>
+
+| Released artifact | Contents |
+| :--- | :--- |
+| `inputs/` | Frozen response, STRING, MAP-KG, candidate-knowledge, and comparator arrays |
+| `checkpoints/` | Selected epoch-8 reference checkpoint |
+| `records/` | Training, selection, evaluation, external-baseline, and verification records |
+| `DATA_MANIFEST.json` | Byte sizes and SHA-256 digests for release verification |
 
 <a id="reproduce"></a>
 
