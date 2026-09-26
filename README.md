@@ -2,8 +2,8 @@
 
 <div align="center">
 
-<h1>VCDesign-CED</h1>
-<h3>Candidate-conditioned inverse modeling for cellular intervention design</h3>
+<h1>VCDesign</h1>
+<h3>Finite-Budget Intervention Design for Virtual Cells</h3>
 
 <p>
   <a href="https://boom5426.github.io/VCDesign-CED/"><img alt="Project website" src="https://img.shields.io/badge/project-website-082D39?logo=githubpages&logoColor=white"></a>
@@ -27,7 +27,7 @@
 
 </div>
 
-**VCDesign** formulates cellular intervention design as finite-budget ranking over a variable candidate set. Given a source state, a desired target state, feasible candidates, and a budget, it prioritizes candidates by the utility of their independently measured outcomes. **VCDesign-CED** extends this setting to candidates whose perturbational responses have not yet been measured.
+**VCDesign** formulates cellular intervention design as finite-budget ranking over a variable candidate set. A solver ranks feasible interventions for a source-to-target transition; evaluation scores the executable top-$B$ prefix using independently measured held-out outcomes. In this CRISPRi benchmark, utility measures the direction of the transcriptomic response. **VCDesign-CED** combines direct candidate scoring with effects inferred from historical perturbation measurements and biological knowledge when a candidate's own response is absent from the CED effect atlas.
 
 <p align="center">
   <a href="paper/VCDesign.pdf"><img src="assets/vcdesign_overview.png" alt="VCDesign framework: finite-budget candidate ranking, outcome-based evaluation, and Candidate Effect Distillation for response-unseen deployment" width="960"></a>
@@ -64,6 +64,14 @@
 | Candidate responses are unavailable | VCDesign-CED predicted-effect scoring |
 
 Both routes use the same downstream decision interface: a candidate pool, an experimental budget, and outcome-based evaluation.
+
+### What the manuscript establishes
+
+- In three held-out cellular contexts, masking candidate responses from the CED atlas gives a pooled paired BU@20 gain of `+0.0492` over the same base scorer and, among 20 selections, `1.11` more top-5% candidates on average.
+- When candidate responses have been measured in other contexts, direct profile retrieval scores higher than VCDesign-CED (pooled BU@20 `0.675` versus `0.508`).
+- Response masking applies to the CED atlas, not to all prior supervision: the fixed base scorer was trained on 68% of masked candidate identities. The manuscript also reports a base-scorer-unseen subset and a locked K562 identity test.
+
+These are retrospective results for transcriptomic directional prioritization, not prospective evidence of improved biological endpoints. The unit-direction held-context configuration was selected on the same evaluation pools and fixed before external baselines were run; the K562 configuration was fixed before its locked split was scored.
 
 <a id="quick-start"></a>
 

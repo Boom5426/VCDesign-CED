@@ -6,12 +6,12 @@
   <meta name="description" content="VCDesign formulates cellular intervention design as finite-budget ranking over a variable candidate set.">
   <meta name="theme-color" content="#072f3a">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="VCDesign-CED — Cellular intervention design">
+  <meta property="og:title" content="VCDesign: Finite-Budget Intervention Design for Virtual Cells">
   <meta property="og:description" content="Rank the experiments worth running, including candidates whose perturbational responses have not yet been measured.">
   <meta property="og:image" content="https://boom5426.github.io/VCDesign-CED/assets/vcdesign_overview.png">
   <meta property="og:image:alt" content="VCDesign framework and Candidate Effect Distillation overview">
   <link rel="canonical" href="https://boom5426.github.io/VCDesign-CED/">
-  <title>VCDesign-CED — Cellular intervention design</title>
+  <title>VCDesign: Finite-Budget Intervention Design for Virtual Cells</title>
   <link rel="icon" href="assets/site/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site/vcdesign.css">
   <script src="assets/site/vcdesign.js" defer></script>
@@ -42,10 +42,10 @@
   <main id="main">
     <section class="wrap hero" id="top">
       <div class="hero-copy">
-        <p class="kicker">VCDesign / candidate-conditioned inverse modeling</p>
+        <p class="kicker">VCDesign / finite-budget intervention design</p>
         <h1>Design the experiment, not just the prediction.</h1>
         <p class="hero-lead">Rank a feasible intervention set toward a desired cellular state under a finite experimental budget.</p>
-        <p class="hero-description">VCDesign evaluates models by the utility of the experiments they prioritize. VCDesign-CED extends that decision to response-unseen candidates by predicting perturbational effects from static biological knowledge.</p>
+        <p class="hero-description">VCDesign evaluates models by the utility of the experiments they prioritize. VCDesign-CED uses historical perturbation measurements and biological knowledge to infer effects for candidates whose own responses are unavailable to its effect atlas.</p>
         <div class="hero-actions">
           <a class="button primary" href="paper/VCDesign.pdf" target="_blank" rel="noopener">Read the paper <span>↗</span></a>
           <a class="button data-button" href="https://huggingface.co/datasets/Boom5426/VCDesign" target="_blank" rel="noopener noreferrer">Get data &amp; artifacts <span>↗</span></a>
@@ -238,7 +238,7 @@ python -m pytest -q</code></pre>
         <div class="paper-mark"><span>V</span><small>Public manuscript</small></div>
         <div class="paper-copy">
           <span class="section-kicker">06 / Paper</span>
-          <h2>VCDesign: Candidate-Conditioned Inverse Modeling for Cellular Intervention Design</h2>
+          <h2>VCDesign: Finite-Budget Intervention Design for Virtual Cells</h2>
           <p>The manuscript defines the design task, response-availability regimes, evaluation protocol, comparator settings, and controlled diagnosis of transferable design.</p>
           <div class="resource-links">
             <a class="button primary" href="paper/VCDesign.pdf" target="_blank" rel="noopener">Paper PDF <span>↗</span></a>

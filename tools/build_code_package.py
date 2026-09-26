@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import re
 import stat
 import zipfile
@@ -11,9 +12,12 @@ from pathlib import Path
 
 
 ARCHIVE_ROOT = "VCDesign_code_package"
+PACKAGE_VERSION = "0.2.3"
+RELEASE_DATE = "2026-09-26"
 ROOT_FILES = (
     "CODE_PACKAGE_README.md",
     "PROJECT_STRUCTURE.md",
+    "assets/vcdesign_overview.png",
     "pyproject.toml",
     "requirements.txt",
     "requirements-cpu.txt",
@@ -26,6 +30,7 @@ TREE_PATTERNS = (
 TOOL_FILES = ("tools/verify_processed_data.py",)
 FORBIDDEN_PARTS = {
     ".git",
+    ".github",
     ".pytest_cache",
     ".venv",
     "__pycache__",
@@ -37,8 +42,13 @@ FORBIDDEN_PARTS = {
 FORBIDDEN_SUFFIXES = {".h5ad", ".npy", ".npz", ".parquet", ".pt", ".pyc"}
 IDENTITY_PATTERNS = (
     re.compile(rb"Boom5426", re.IGNORECASE),
+    re.compile(rb"\b(?:Bo Li|Lin Wang|Bob Zhang|Mengran Li|Zhenchao Tang|Chengyang Zhang|Minghao Sun|Chengliang Liu|Zhiyuan Liu|Yang Zhang)\b", re.IGNORECASE),
+    re.compile(rb"University of Macau", re.IGNORECASE),
+    re.compile(rb"(?:https?://|git@)github\.com[:/][^/\s]+/VCDesign(?:-CED)?(?:[/#?\s\"']|$)", re.IGNORECASE),
+    re.compile(rb"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(?:com|org|net|edu|io|ai|mo|cn|uk)\b", re.IGNORECASE),
     re.compile(rb"runs in the ``boom`` env", re.IGNORECASE),
     re.compile(rb"/home/[A-Za-z0-9_.-]+/"),
+    re.compile(rb"/Users/[A-Za-z0-9_.-]+/"),
     re.compile(rb"[A-Za-z]:\\\\Users\\\\[^\\\\]+\\\\", re.IGNORECASE),
 )
 
@@ -53,11 +63,26 @@ def _payloads(root: Path) -> dict[str, bytes]:
             data = data.replace(
                 b"[REPRODUCE.md](REPRODUCE.md)", b"[README.md](README.md)"
             )
+            data = data.replace(b"src/gene_open_inverse/", b"gene_open_inverse/")
+            data = data.replace(
+                b"paper/                                 final manuscript PDF",
+                b"assets/                                framework overview image",
+            )
+        if relative == "pyproject.toml":
+            data = data.replace(b'where = ["src"]', b'where = ["."]')
+            data = data.replace(
+                b'testpaths = ["src/gene_open_inverse"]',
+                b'testpaths = ["gene_open_inverse"]',
+            )
         payloads[target] = data
     for pattern in TREE_PATTERNS:
         for source in sorted(root.glob(pattern)):
             if source.is_file():
-                payloads[source.relative_to(root).as_posix()] = source.read_bytes()
+                relative = source.relative_to(root).as_posix()
+                target = relative.removeprefix("src/")
+                if target in payloads:
+                    raise ValueError(f"duplicate archive target: {target}")
+                payloads[target] = source.read_bytes()
     for relative in TOOL_FILES:
         payloads[relative] = (root / relative).read_bytes()
     return payloads
@@ -70,8 +95,13 @@ def _audit_payloads(payloads: dict[str, bytes]) -> None:
         path = Path(relative)
         if path.is_absolute() or ".." in path.parts:
             raise ValueError(f"unsafe archive path: {relative}")
+        for pattern in IDENTITY_PATTERNS:
+            if pattern.search(relative.encode()):
+                raise ValueError(f"identity or machine-specific path found in {relative}")
         if FORBIDDEN_PARTS.intersection(path.parts):
             raise ValueError(f"forbidden directory in package: {relative}")
+        if path.parts[:2] == ("src", "gene_open_inverse"):
+            raise ValueError(f"unflattened source path in package: {relative}")
         if path.suffix.lower() in FORBIDDEN_SUFFIXES:
             raise ValueError(f"forbidden generated or data file: {relative}")
         for pattern in IDENTITY_PATTERNS:
@@ -89,7 +119,7 @@ def _manifest(payloads: dict[str, bytes]) -> bytes:
 
 def _zip_info(relative: str) -> zipfile.ZipInfo:
     info = zipfile.ZipInfo(
-        f"{ARCHIVE_ROOT}/{relative}", date_time=(2026, 9, 24, 0, 0, 0)
+        f"{ARCHIVE_ROOT}/{relative}", date_time=(2026, 9, 26, 0, 0, 0)
     )
     info.compress_type = zipfile.ZIP_DEFLATED
     info.create_system = 3
@@ -104,6 +134,19 @@ def build(root: Path, output: Path) -> None:
         raise FileNotFoundError(f"output directory does not exist: {output.parent}")
     payloads = _payloads(root)
     _audit_payloads(payloads)
+    payloads["CODE_PACKAGE_RELEASE.json"] = (
+        json.dumps(
+            {
+                "archive_root": ARCHIVE_ROOT,
+                "release_date": RELEASE_DATE,
+                "schema": "VCDESIGN_CODE_RELEASE_V1",
+                "version": PACKAGE_VERSION,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n"
+    ).encode()
     payloads["CODE_PACKAGE_MANIFEST.sha256"] = _manifest(payloads)
     with zipfile.ZipFile(
         output, "x", compression=zipfile.ZIP_DEFLATED, compresslevel=9
@@ -114,6 +157,8 @@ def build(root: Path, output: Path) -> None:
 
 def verify(path: Path) -> None:
     with zipfile.ZipFile(path) as archive:
+        if archive.comment:
+            raise ValueError("archive comment is not permitted")
         members = archive.infolist()
         if not members:
             raise ValueError("archive is empty")
@@ -123,6 +168,8 @@ def verify(path: Path) -> None:
         prefix = f"{ARCHIVE_ROOT}/"
         payloads: dict[str, bytes] = {}
         for member in members:
+            if member.comment or member.extra:
+                raise ValueError(f"archive metadata is not permitted: {member.filename}")
             if not member.filename.startswith(prefix):
                 raise ValueError(f"path outside archive root: {member.filename}")
             relative = member.filename[len(prefix):]
@@ -134,6 +181,10 @@ def verify(path: Path) -> None:
         if manifest is None:
             raise ValueError("archive manifest is missing")
         _audit_payloads(payloads)
+        if not any(relative.startswith("gene_open_inverse/") for relative in payloads):
+            raise ValueError("flattened gene_open_inverse source tree is missing")
+        if any(relative.startswith("src/") for relative in payloads):
+            raise ValueError("archive unexpectedly contains a src directory")
         if manifest != _manifest(payloads):
             raise ValueError("archive manifest does not match its payload")
 
