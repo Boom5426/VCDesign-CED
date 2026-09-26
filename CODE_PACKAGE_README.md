@@ -1,8 +1,8 @@
-# VCDesign-CED: anonymous ICLR 2027 code supplement
+# VCDesign-CED: portable code package
 
-This archive contains the source code, frozen configuration, synthetic smoke example, and protocol tests for **VCDesign: Candidate-Conditioned Inverse Modeling for Cellular Intervention Design**.
+This package contains the source code, frozen configuration, synthetic smoke example, and protocol tests for **VCDesign: Candidate-Conditioned Inverse Modeling for Cellular Intervention Design**.
 
-## Scope of this archive
+## Scope of this package
 
 Included:
 
@@ -20,7 +20,7 @@ Not included:
 - large processed inputs, checkpoints, or cached run records; or
 - outputs from local executions.
 
-The manuscript and review submission provide the experimental definitions and reported results. Large inputs should be supplied as a separate anonymous artifact when required for review.
+The manuscript provides the experimental definitions and reported results. Large processed inputs can be supplied separately when needed for reproduction.
 
 ## Fast verification
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and verify the anonymous VCDesign ICLR code supplement."""
+"""Build and verify a portable VCDesign code package."""
 from __future__ import annotations
 
 import argparse
@@ -10,9 +10,9 @@ import zipfile
 from pathlib import Path
 
 
-ARCHIVE_ROOT = "VCDesign_ICLR2027_code"
+ARCHIVE_ROOT = "VCDesign_code_package"
 ROOT_FILES = (
-    "ICLR_CODE_README.md",
+    "CODE_PACKAGE_README.md",
     "PROJECT_STRUCTURE.md",
     "pyproject.toml",
     "requirements.txt",
@@ -47,7 +47,7 @@ def _payloads(root: Path) -> dict[str, bytes]:
     payloads: dict[str, bytes] = {}
     for relative in ROOT_FILES:
         source = root / relative
-        target = "README.md" if relative == "ICLR_CODE_README.md" else relative
+        target = "README.md" if relative == "CODE_PACKAGE_README.md" else relative
         data = source.read_bytes()
         if relative == "PROJECT_STRUCTURE.md":
             data = data.replace(

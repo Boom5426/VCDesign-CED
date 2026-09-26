@@ -1,12 +1,12 @@
-"""Frozen contract of ICLR_EXTERNAL_BASELINE_AND_EVALUATION_CLOSURE_V1.
+"""Frozen contract of EXTERNAL_BASELINE_AND_EVALUATION_CLOSURE_V1.
 
-Machine-readable twin of ``docs/ICLR_EXTERNAL_BASELINE_AND_EVALUATION_CLOSURE_V1_PROTOCOL.md``.
+Machine-readable twin of the external-baseline and evaluation-closure protocol.
 Nothing here is tuned on an outcome.  VCDesign itself is frozen: ``RIDGE_UNIT`` (C-018 A1) with
 the frozen fusion, read from C-018's saved effects and never refitted.
 """
 from __future__ import annotations
 
-MISSION = "ICLR_EXTERNAL_BASELINE_AND_EVALUATION_CLOSURE_V1"
+MISSION = "EXTERNAL_BASELINE_AND_EVALUATION_CLOSURE_V1"
 PRIMARY_CONTEXTS = ("RPE1", "HepG2", "Jurkat")
 TRAINING_CONTEXTS = ("K562", "RPE1", "HepG2", "Jurkat")
 REGIMES = ("SEEN", "MASKED")
