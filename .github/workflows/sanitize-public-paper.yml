@@ -1,0 +1,95 @@
+name: Sanitize public manuscript
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/sanitize-public-paper.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  sanitize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install PDF tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pymupdf
+          sudo apt-get update -qq
+          sudo apt-get install -y poppler-utils
+
+      - name: Remove venue and review-status markers
+        run: |
+          python - <<'PY'
+          import fitz
+          from pathlib import Path
+
+          src = Path("paper/VCDesign.pdf")
+          tmp = Path("paper/VCDesign.sanitized.pdf")
+          doc = fitz.open(src)
+
+          targets = [
+              "Under review as a conference paper at ICLR 2027",
+              "Paper under double-blind review",
+          ]
+          counts = {t: 0 for t in targets}
+
+          for page in doc:
+              for target in targets:
+                  for rect in page.search_for(target):
+                      counts[target] += 1
+                      r = fitz.Rect(rect.x0 - 1.5, rect.y0 - 1.0,
+                                    rect.x1 + 1.5, rect.y1 + 1.0)
+                      page.add_redact_annot(r, fill=(1, 1, 1))
+              # Remove the template separator line left after deleting the header.
+              page.add_redact_annot(
+                  fitz.Rect(106.5, 38.0, 505.5, 40.4),
+                  fill=(1, 1, 1),
+              )
+              page.apply_redactions()
+
+          doc.set_metadata({
+              "title": "",
+              "author": "",
+              "subject": "",
+              "keywords": "",
+              "creator": "",
+              "producer": "",
+              "creationDate": "",
+              "modDate": "",
+              "trapped": "",
+          })
+          doc.save(tmp, garbage=4, deflate=True, clean=True)
+          doc.close()
+
+          if counts[targets[0]] != 37:
+              raise SystemExit(f"Expected 37 venue headers, found {counts[targets[0]]}")
+          if counts[targets[1]] != 1:
+              raise SystemExit(f"Expected one review-status line, found {counts[targets[1]]}")
+
+          tmp.replace(src)
+          print(counts)
+          PY
+
+      - name: Verify anonymous public copy
+        run: |
+          pdftotext paper/VCDesign.pdf paper/VCDesign.txt
+          ! grep -Eiq 'Under review as a conference paper|ICLR 2027|Paper under double-blind review|Bo Li|University of Macau|National University of Singapore|boom5426|@' paper/VCDesign.txt
+          grep -q 'Anonymous authors' paper/VCDesign.txt
+          grep -q 'VCDESIGN: FINITE-BUDGET INTERVENTION DESIGN' paper/VCDesign.txt
+          rm paper/VCDesign.txt
+
+      - name: Commit sanitized PDF and remove one-off workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/sanitize-public-paper.yml
+          git add paper/VCDesign.pdf
+          git commit -m "Sanitize public VCDesign manuscript"
+          git push
